@@ -31,30 +31,38 @@ Released   : 20120902
 			<div id="menu">
 			  <ul>
 					<li ><a href="/SE">Homepage</a></li>
-					<?php
-					session_start();
-					if(isset($_SESSION['username']) && isset($_SESSION['id'])){
-					
-					?>
-					<li><a href="logout.php">Logout</a></li>
-					<?php
-					}
-					else{
-					?>
-					<li><a href="loginForm.php">Login</a></li>
-					<?php
-					}
-					?>
+					<li><a href="login.html">Login</a></li>
 					<li><a href="credits.html">Credits</a></li>
 <!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
 			</div>
 		</div>
-		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
-		<div id="banner">
-			<div class="content"><img src="images/img10.jpg" width="1040" height="350" alt="" /></div>
-			<div><img src="images/img03.png" width="1000" height="40" alt="" /></div>
+		<div id="page">
+  <div id="content">
+			<div class="post">
+				<h1 class="credentials"><a href="#">LOGIN</a></h1>
+				<p class="meta"><span class="date"></span></p>
+<?php
+if(isset($_POST["invalid"])){
+	echo("The username or password entered is invalid");
+}
+?>				
+			  <form action="login.php" method="POST">
+				
+				Username <input type="text" name="username"></input>
+				<br/><br/>
+				Password <input type="password" name="password"></input>
+				<input type="submit" name="Login" value="Login"></input>
+				
+				</form>
+			</div>
 		</div>
+		
+	  
+		<!-- end #content --><!-- end #sidebar -->
+	  <div style="clear: both;">&nbsp;</div>
+  </div>
+		
 	</div>
 	<!-- end #header -->
   <div id="page">
@@ -90,7 +98,8 @@ Released   : 20120902
 </div>
 <div id="footer-content"></div>
 <div id="footer">
-	<p>Copyright (c) 2012 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org">FCT</a>. Photos by <a href="http://fotogrph.com/">Fotogrph</a>.</p>
+	<p>Copyright (c) 2012 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org">FCT</a>. Photos by <a href="http://fotogrph.com/">
+Fotogrph</a>.</p>
 </div>
 <!-- end #footer -->
 </body>
