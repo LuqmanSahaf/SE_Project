@@ -42,11 +42,7 @@ Released   : 20120902
 			<div class="post">
 				<h1 class="credentials"><a href="#">LOGIN</a></h1>
 				<p class="meta"><span class="date"></span></p>
-<?php
-if(isset($_POST["invalid"])){
-	echo("The username or password entered is invalid");
-}
-?>				
+		
 			  
 			</div>
 	</div>
@@ -63,6 +59,11 @@ if(isset($_POST["invalid"])){
 			<div class="post">
 				<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
 				<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
+				<?php
+					if(isset($_POST["invalid"])){
+						echo("The username or password entered is incorrect");
+					}
+				?>		
 				<form action="login.php" method="POST">
 				
 				Username <input type="text" name="username"></input>

@@ -21,7 +21,7 @@ Released   : 20120902
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true&libraries=places" type="text/javascript"></script>
 
 <script type = "text/javascript">
 
@@ -34,8 +34,12 @@ $(document).ready(function () {
 		var mapOptions = {
 			center: new google.maps.LatLng(31.470857, 74.40742479999994),
 			zoom: 13,
+			maxZoom: 15, 
+			minZoom: 7,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			streetViewControl: false
+			mapTypeControl: false,
+			streetViewControl: false,
+			scrollwheel: false
 		};
 		var map = new google.maps.Map(document.getElementById('map-canvas'),
 			mapOptions);
@@ -88,16 +92,15 @@ $(document).ready(function () {
 				].join(' ');
 			}
 
-			infowindow.setContent('<div><input type="button"value="Confirm Place" id="Confirm" ></input><br/><strong>' + place.name + '</strong><br>' + address);
+			infowindow.setContent('<div><input class="button" type="button"value="Confirm Place" id="Confirm" ></input><br/><strong>' + place.name + '</strong><br>' + address);
 			infowindow.open(map, marker);
 		});
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
-	$('#regular, #weekdays').hide();
 	
 	
 	
-	
+	$('#regular, #weekdays,#destination-span, #source-span,#content2,#showmap').hide();
 	$("#frequency2").click(function(){
 		$("#regular").show(300);
 		$("#map-canvas").show(300);
@@ -116,6 +119,7 @@ $(document).ready(function () {
 		}
 	});
 	
+	
 	$("input[name='regular1']").change(function(){
 		if($(this).val() == "weekly"){
 			$("#weekdays").show(300);
@@ -127,8 +131,48 @@ $(document).ready(function () {
 				document.getElementById('day'+i).checked = false;
 			}
 		}
+		$("#searchTextField").show(300);
 	});
 	
+	$("input[name='LUMS']").change(function(){
+		if($(this).val() == "source"){
+			$("#source-span").hide("slow");
+			$("#destination-span").show("slow");
+		}
+		else{
+			
+			$("#destination-span").hide("slow");
+			$("#source-span").show("slow");
+		}
+		$("#showmap").show("slow");
+		initialize();
+	});
+	
+	$("#step2").click(function(){
+		if ($("#frequency1").is(":checked") == false && $("#frequency2").is(":checked") == false){
+			alert("Please, complete previous steps first!");
+			return;
+		}
+		else if($("#frequency2").is(":checked") == true && ($("#regularType1").is(":checked") == false && $("#regularType2").is(":checked") == false &&$("#regularType3").is(":checked") == false )){
+			alert("Please, complete previous steps first!");
+			return;
+		}
+		else if($("#regularType2").is(":checked") == true && !($("#day1").is(":checked") == true || $("#day2").is(":checked") == true 
+			|| $("#day3").is(":checked") == true || $("#day4").is(":checked") == true || $("#day5").is(":checked") == true || $("#day6").is(":checked") == true
+			|| $("#day7").is(":checked") == true)){
+			alert("Please, complete previous steps first!");
+			return;
+		}
+		goToByScroll("step1");
+		$("#content2").slideDown("slow");
+		$("#content1").slideUp("slow");
+		
+		$("#content2").show(300);
+	});
+	
+	function goToByScroll(id){
+		jQuery("html,body").animate({scrollTop: jQuery("#"+id).offset().top},"slow");
+	}
 	
 });
 </script>
@@ -167,49 +211,57 @@ $(document).ready(function () {
 			</div>
 			<div id="content">
 				<div id="form1">
-					
-					Once or Regularly:<br/>
-					<div id = "once">
-					<input id="frequency1" name = "frequency" type = "radio" value = "single" > Single<br>
-					<input id="frequency2" name = "frequency" type = "radio" value = "regular" > Regular<br>
+				<h5 id = "step1">Step 1: Schedule</h5>
+					<div id = "content1">
+						Once or Regularly:<br/>
+						<div id = "once">
+						<input id="frequency1" name = "frequency" type = "radio" value = "single" > Single<br>
+						<input id="frequency2" name = "frequency" type = "radio" value = "regular" > Regular<br>
+						</div>
+						<div id = "regular" >
+							How Often:
+							<br/>
+							<input id="regularType1" name = "regular1" type = "radio" value = "daily"> Daily </input>
+							<input id="regularType2" name = "regular1" type = "radio" value = "weekly"> Weekly </input>
+							<input id="regularType3" name = "regular1" type = "radio" value = "monthly"> Monthly </input>
+							<br/>
+							<div id = "weekdays">
+								<input id="day1" name = "days" type = "checkbox" value = "1">Mon</input>
+								<input id="day2" name = "days" type = "checkbox" value = "2">Tue</input>
+								<input id="day3" name = "days" type = "checkbox" value = "3">Wed</input>
+								<input id="day4" name = "days" type = "checkbox" value = "4">Thu</input>
+								<input id="day5" name = "days" type = "checkbox" value = "5">Fri</input>
+								<input id="day6" name = "days" type = "checkbox" value = "6">Sat</input>
+								<input id="day7" name = "days" type = "checkbox" value = "7">Sun</input>
+							</div>
+						</div>
 					</div>
-					
-					
-					<div id = "regular" >
-						
-						How Often:
-						<br/>
-						<input id="regularType1" name = "regular1" type = "radio" value = "daily"> Daily </input>
-						<input id="regularType2" name = "regular1" type = "radio" value = "weekly"> Weekly </input>
-						<input id="regularType3" name = "regular1" type = "radio" value = "monthly"> Monthly </input>
-						<br/>
-						<div id = "weekdays">
-							<input id="day1" name = "days" type = "checkbox" value = "1">Mon</input>
-							<input id="day2" name = "days" type = "checkbox" value = "2">Tue</input>
-							<input id="day3" name = "days" type = "checkbox" value = "3">Wed</input>
-							<input id="day4" name = "days" type = "checkbox" value = "4">Thu</input>
-							<input id="day5" name = "days" type = "checkbox" value = "5">Fri</input>
-							<input id="day6" name = "days" type = "checkbox" value = "6">Sat</input>
-							<input id="day7" name = "days" type = "checkbox" value = "7">Sun</input>
+					<h5 id = "step2">Step 2: Place And Time</h5>
+						<div id="content2">
+							<br/>
+							<p>According to our policy, LUMS should be either source or destination!<br/>In your trip, LUMS is:</p>
+							<input type="radio" name="LUMS" id="LUMS0" value="source"/><label for="LUMS0">Source</label>
+							<input type="radio" name="LUMS" id="LUMS1" value="destination"/><label for="LUMS1">Destination</label>
+							<br/>
+							
+							<span id="destination-span">Destination</span>
+							<span id="source-span">Source</span>
+							
+							<div id="showmap">
+								<input id="searchTextField" type="text" size="50"/>
+								<div id="map-canvas">
+								</div>
+							</div>
 						</div>
 						
-						
 					</div>
-					Source:<br/>
-					<input id="searchTextField" type="text" size="50">
-					
-					<div id="map-canvas">
-					</div>
-				</div>
-				
-				
 				<?php
 				
 				
 				?>
 					
 				</p>
-			</div>
+				</div>
 	</div>
 		
 	  

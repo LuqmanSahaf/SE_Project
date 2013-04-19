@@ -259,7 +259,6 @@ a:hover {
 	height: 1000px;
 	padding: 0px;
 	margin-bottom:50px;
-	background:#dde;
 }
 
 #form1{
@@ -571,8 +570,48 @@ a:hover {
 	width: 300px;
 }
 #map-canvas {
-	height: 350px;
-	width: 700px;
+	height: 400px;
+	width: 800px;
 	margin-top: 0.6em;
-	
+	left: 20px;
 }
+
+.button{
+	background: none repeat scroll 0% 0% rgb(106, 175, 0);
+	color:rgb(255,255,255);
+	border-color:rgb(106, 175, 0);
+}
+
+.button:hover{
+	border: 1px solid rgb(80, 134, 0);
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: rgb(80, 134, 0);
+	border-bottom-color: rgb(80, 134, 0);
+	-moz-border-top-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	border-image-source: none;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-width: 1 1 1 1;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	background-color: rgb(255, 255, 255);
+	color: rgb(80, 134, 0);
+}
+
+#searchTextField{
+	position:relative;
+	left: 20px;
+}
+
+h5{
+	background: none repeat scroll 0% 0% rgb(176,176,224);
+	min-width: 500px;
+	cursor:pointer;
+}
+
+
