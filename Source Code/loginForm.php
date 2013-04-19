@@ -31,7 +31,7 @@ Released   : 20120902
 			<div id="menu">
 			  <ul>
 					<li ><a href="/SE">Homepage</a></li>
-					<li><a href="login.html">Login</a></li>
+					<li><a href="loginForm.php">Login</a></li>
 					<li><a href="credits.html">Credits</a></li>
 <!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
@@ -47,16 +47,9 @@ if(isset($_POST["invalid"])){
 	echo("The username or password entered is invalid");
 }
 ?>				
-			  <form action="login.php" method="POST">
-				
-				Username <input type="text" name="username"></input>
-				<br/><br/>
-				Password <input type="password" name="password"></input>
-				<input type="submit" name="Login" value="Login"></input>
-				
-				</form>
+			  
 			</div>
-		</div>
+	</div>
 		
 	  
 		<!-- end #content --><!-- end #sidebar -->
@@ -69,7 +62,15 @@ if(isset($_POST["invalid"])){
   <div id="content">
 			<div class="post">
 				<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
-				<p class="meta"><span class="date">April 03, 2013</span></p>
+				<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
+				<form action="login.php" method="POST">
+				
+				Username <input type="text" name="username"></input>
+				<br/><br/>
+				Password <input type="password" name="password"></input>
+				<input type="submit" name="Login" value="Login"></input>
+				
+				</form>
 			</div>
 		</div>
 		<div id="three-columns">

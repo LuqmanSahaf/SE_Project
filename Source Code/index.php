@@ -34,7 +34,7 @@ Released   : 20120902
 					<?php
 					session_start();
 					if(isset($_SESSION['username']) && isset($_SESSION['id'])){
-					
+						
 					?>
 					<li><a href="logout.php">Logout</a></li>
 					<?php
@@ -61,7 +61,7 @@ Released   : 20120902
   <div id="content">
 			<div class="post">
 				<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
-				<p class="meta"><span class="date">April 03, 2013</span></p>
+				<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
 			</div>
 		</div>
 		<div id="three-columns">

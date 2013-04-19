@@ -30,7 +30,7 @@ function check_login($username, $password)
 	}
 	
 }
-
+//error_reporting(0);
 if(check_login($_POST["username"], $_POST["password"])){
 	
 	header("Location: home.php");

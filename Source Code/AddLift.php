@@ -20,35 +20,117 @@ Released   : 20120902
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
 
-<script src="http://maps.google.com/maps/api/js?sensor=true&libraries=places" type="text/javascript"></script>
+<script type = "text/javascript">
 
-<script>
 
-function regularLift(e) {
+$(document).ready(function () {
 
-	var i;
-	document.getElementById('regular').style.visibility = e.checked && e.id == 'frequency2' ? 'visible' : 'hidden';
-	document.getElementById('weekdays').style.visibility = e.checked && e.id == 'frequency2' ? 'visible' : 'hidden';
-	
-	for( i = 1 ; i <=3 ; i++){
-		document.getElementById('regularType'+i).checked = false;
-	}
-}
-
-function regularType(e) {
-		var i;
-		document.getElementById('weekdays').style.visibility = 
-				e.checked && (e.id == 'regularType2') ? 'visible' : 'hidden';
-				
+  //your code here
+	function initialize() {
 		
-		for(i = 1 ; i<=7 ; i++){
-			document.getElementById('day'+i).checked = false;
+		var mapOptions = {
+			center: new google.maps.LatLng(31.470857, 74.40742479999994),
+			zoom: 13,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			streetViewControl: false
+		};
+		var map = new google.maps.Map(document.getElementById('map-canvas'),
+			mapOptions);
+
+		var input = document.getElementById('searchTextField');
+		var autocomplete = new google.maps.places.Autocomplete(input);
+
+		autocomplete.bindTo('bounds', map);
+
+		var infowindow = new google.maps.InfoWindow();
+		var marker = new google.maps.Marker({
+			map: map
+		});
+
+		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+			infowindow.close();
+			marker.setVisible(false);
+			input.className = '';
+			var place = autocomplete.getPlace();
+			if (!place.geometry) {
+				// Inform the user that the place was not found and return.
+				input.className = 'notfound';
+				return;
+			}
+
+			// If the place has a geometry, then present it on a map.
+			if (place.geometry.viewport) {
+				map.fitBounds(place.geometry.viewport);
+			} else {
+				map.setCenter(place.geometry.location);
+				map.setZoom(15);
+			}
+			var image = {
+				url: place.icon,
+				size: new google.maps.Size(71, 71),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(17, 34),
+				scaledSize: new google.maps.Size(35, 35)
+			};
+			marker.setIcon(image);
+			marker.setPosition(place.geometry.location);
+			marker.setVisible(true);
+
+			var address = '';
+			if (place.address_components) {
+				address = [
+					(place.address_components[0] && place.address_components[0].short_name || ''),
+					(place.address_components[1] && place.address_components[1].short_name || ''),
+					(place.address_components[2] && place.address_components[2].short_name || '')
+				].join(' ');
+			}
+
+			infowindow.setContent('<div><input type="button"value="Confirm Place" id="Confirm" ></input><br/><strong>' + place.name + '</strong><br>' + address);
+			infowindow.open(map, marker);
+		});
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+	$('#regular, #weekdays').hide();
+	
+	
+	
+	
+	$("#frequency2").click(function(){
+		$("#regular").show(300);
+		$("#map-canvas").show(300);
+	});
+	
+	$('#frequency1').click(function(){
+		var i;
+		$('#weekdays').hide(300);
+		$('#regular').hide(300);
+		
+		for( i = 1 ; i <=3 ; i++){
+			document.getElementById('regularType'+i).checked = false;
 		}
-}
-
-
-
+		for( i = 1 ; i <=7 ; i++){
+				document.getElementById('day'+i).checked = false;
+		}
+	});
+	
+	$("input[name='regular1']").change(function(){
+		if($(this).val() == "weekly"){
+			$("#weekdays").show(300);
+		}
+		else{
+			$("#weekdays").hide(300);
+			var i;
+			for( i = 1 ; i <=7 ; i++){
+				document.getElementById('day'+i).checked = false;
+			}
+		}
+	});
+	
+	
+});
 </script>
 
 </head>
@@ -61,13 +143,14 @@ function regularType(e) {
 			</div>
 			<div id="menu">
 			  <ul>
-					<li ><a href="index.php">Homepage</a></li>
-					<li><a href="logout.php">Logout</a></li>
+					<li ><a href="home.php">Home</a></li>
 					<li><a href="credits.html">Credits</a></li>
+					<li><a href="logout.php">Logout</a></li>
 <!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
 			</div>
 		</div>
+	</div>
 	<div id="page">
 		
 			<div class="post">
@@ -84,38 +167,42 @@ function regularType(e) {
 			</div>
 			<div id="content">
 				<div id="form1">
-					<form>
+					
 					Once or Regularly:<br/>
 					<div id = "once">
-					<input id="frequency1" name = "frequency" type = "radio" value = "single" id = "onetime" onchange="regularLift(this)"> Single<br>
-					<input id="frequency2" name = "frequency" type = "radio" value = "regular" id = "regulary" onchange="regularLift(this)"> Regular<br>
+					<input id="frequency1" name = "frequency" type = "radio" value = "single" > Single<br>
+					<input id="frequency2" name = "frequency" type = "radio" value = "regular" > Regular<br>
 					</div>
 					
 					
-					<div id = "regular" style = "visibility:hidden">
+					<div id = "regular" >
 						
 						How Often:
 						<br/>
-						<input id="regularType1" name = "regular1" type = "radio" value = "daily" onchange="regularType(this)"> Daily </input>
-						<input id="regularType2" name = "regular1" type = "radio" value = "weekly" onchange="regularType(this)"> Weekly </input>
-						<input id="regularType3" name = "regular1" type = "radio" value = "monthly" onchange="regularType(this)"	> Monthly </input>
-							<br/>
-							<div id = "weekdays" style="visibility:hidden">
-								<input id="day1" name = "days" type = "checkbox" value = "1">Mon</input>
-								<input id="day2" name = "days" type = "checkbox" value = "2">Tue</input>
-								<input id="day3" name = "days" type = "checkbox" value = "3">Wed</input>
-								<input id="day4" name = "days" type = "checkbox" value = "4">Thu</input>
-								<input id="day5" name = "days" type = "checkbox" value = "5">Fri</input>
-								<input id="day6" name = "days" type = "checkbox" value = "6">Sat</input>
-								<input id="day7" name = "days" type = "checkbox" value = "7">Sun</input>
-							</div>
-						
+						<input id="regularType1" name = "regular1" type = "radio" value = "daily"> Daily </input>
+						<input id="regularType2" name = "regular1" type = "radio" value = "weekly"> Weekly </input>
+						<input id="regularType3" name = "regular1" type = "radio" value = "monthly"> Monthly </input>
 						<br/>
+						<div id = "weekdays">
+							<input id="day1" name = "days" type = "checkbox" value = "1">Mon</input>
+							<input id="day2" name = "days" type = "checkbox" value = "2">Tue</input>
+							<input id="day3" name = "days" type = "checkbox" value = "3">Wed</input>
+							<input id="day4" name = "days" type = "checkbox" value = "4">Thu</input>
+							<input id="day5" name = "days" type = "checkbox" value = "5">Fri</input>
+							<input id="day6" name = "days" type = "checkbox" value = "6">Sat</input>
+							<input id="day7" name = "days" type = "checkbox" value = "7">Sun</input>
+						</div>
 						
+						
+					</div>
+					Source:<br/>
+					<input id="searchTextField" type="text" size="50">
+					
+					<div id="map-canvas">
 					</div>
 				</div>
 				
-				</form>
+				
 				<?php
 				
 				
