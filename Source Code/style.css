@@ -239,6 +239,7 @@ a:hover {
 #page {
 	width: 1000px;
 	min-height: 2000px;
+	overflow:visible;
 	margin: 60px auto 0 auto;
 	padding: 30px 50px;
 	background: #FFFFFF;
@@ -570,7 +571,14 @@ a:hover {
 	width: 300px;
 }
 #map-canvas {
-	height: 400px;
+	height: 275px;
+	width: 800px;
+	margin-top: 0.6em;
+	left: 20px;
+}
+
+#map-canvas2{
+	height: 275px;
 	width: 800px;
 	margin-top: 0.6em;
 	left: 20px;
@@ -614,4 +622,100 @@ h5{
 	cursor:pointer;
 }
 
+#select-seats{
+	margin-left:150px;
+}
 
+.step-content{
+	margin-right:20px;
+	margin-left:20px;
+}
+
+.text-input{
+	width:99.5%;
+	display: inline;
+	transition: box-shadow 0.3s ease 0s;
+	transition-property: box-shadow;
+	transition-duration: 0.3s;
+	transition-timing-function: ease;
+	transition-delay: 0s;
+}
+
+.text-input1{
+	width:49%;
+	display: inline;
+	transition: box-shadow 0.3s ease 0s;
+	transition-property: box-shadow;
+	transition-duration: 0.3s;
+	transition-timing-function: ease;
+	transition-delay: 0s;
+	
+}
+
+.text-input2{
+	width:49%;
+	display: inline;
+	transition: box-shadow 0.3s ease 0s;
+	transition-property: box-shadow;
+	transition-duration: 0.3s;
+	transition-timing-function: ease;
+	transition-delay: 0s;
+	margin-right:0px;
+	margin-left:2px;
+}
+
+.button2{
+	width: 100%;
+	cursor:pointer;
+	font-weight: bold;
+	padding: 0.2em 0.4em;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	display: block;
+	line-height: 1.4em;
+	font-size: 1.1em;
+	margin: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+	background-color: rgb(201,221,255);
+}
+.button2:hover{
+	background-color: rgb(173,206,245);
+}
+
+p1{
+	font-size:75%;
+	font-weight:normal;
+}
+
+
+#confirm-menu{
+	min-height:120px;
+	margin-right:20px;
+	margin-left:20px;
+}
+
+.days{
+	width:15%;
+	float:left;
+	
+}
+
+.start-time{
+	width: 30%;
+}
+
+.end-time{
+	position:relative;
+	top:-29px;
+	float:right;
+	width:45%;
+}
+
+
+
+
+.ui-widget{
+	font-size:0.6em;
+}
