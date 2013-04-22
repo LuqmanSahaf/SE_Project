@@ -355,7 +355,7 @@ $(document).ready(function () {
 	$("#start-time").append(startTime);
 	$("#end-time").append(backTime);
 	
-	$('#regular,#destination-span,#label-datepicker2,#label-datepicker1,#start-time,#end-time,#source-span,#selectLUMS,#searchTextField,#showmap,#show-directions,#confirm-menu,#confirm-button,#content1,#content2,#content3,#content4,#content5,#Date,#Time,#singleLiftTime,#regularLiftTime,#single-time,#regular-time,#datepicker1,#datepicker2,#datepicker3,#datepicker4').hide();
+	$('#regular,#destination-span,#Date,#label-datepicker2,#label-datepicker1,#start-time,#end-time,#source-span,#selectLUMS,#searchTextField,#showmap,#show-directions,#confirm-menu,#confirm-button,#content1,#content2,#content3,#content4,#content5,#Date,#Time,#singleLiftTime,#regularLiftTime,#single-time,#regular-time,#datepicker1,#datepicker2,#datepicker3,#datepicker4').hide();
 	for(k=1; k<7; k++){
 		$('#days-time'+k).hide();
 	}
@@ -371,6 +371,7 @@ $(document).ready(function () {
 		$("#regular").show(300);
 		$("#map-canvas").show(300);
 		$("#map-canvas2").show(300);
+		
 	});
 	
 	$('#frequency1').click(function(){
@@ -383,6 +384,7 @@ $(document).ready(function () {
 		for( i = 1 ; i <=7 ; i++){
 				document.getElementById('day'+i).checked = false;
 		}
+		
 	});
 	
 	
@@ -498,17 +500,7 @@ $(document).ready(function () {
 	});
 	
 	$("#step2").click(function(){
-		if ($("#frequency1").is(":checked") == false && $("#frequency2").is(":checked") == false){
-			alert("Please, complete previous steps first!");
-			return;
-		}
-		else if($("#frequency2").is(":checked") == true && $("#regularType1").is(":checked") == false && $("#regularType2").is(":checked") == false ){
-			alert("Please, complete previous steps first!");
-			return;
-		}
-		else if(($("#regularType1").is(":checked")  == true || $("#regularType2").is(":checked")  == true) && !($("#day1").is(":checked") == true || $("#day2").is(":checked") == true 
-			|| $("#day3").is(":checked") == true || $("#day4").is(":checked") == true || $("#day5").is(":checked") == true || $("#day6").is(":checked") == true
-			|| $("#day7").is(":checked") == true)){
+		if(!checkStep1()){
 			alert("Please, complete previous steps first!");
 			return;
 		}
@@ -525,8 +517,7 @@ $(document).ready(function () {
 			$("#singleLiftTime").show("fast");
 			$("#regularLiftTime").hide("fast");
 			$("#single-time").show("fast");
-			$("#Time").show("fast");
-			$("#Date").show("fast");
+			
 			$("end-time").hide("fast");
 			$("regular-time").hide("fast");
 			var i;
@@ -543,22 +534,21 @@ $(document).ready(function () {
 			$("#singleLiftTime").hide("fast");
 			$("#single-time").hide("fast");
 			
-			$("#Time").show("fast");
+			
 			for(i=1; i < 8; i++){
 				if($("#day"+i).is(":checked") == true)
 					$("#days-time"+i).show("fast");
 			}
+			$("#Time").show("fast");
+			$("#Date").show("fast");
 		}
 		$("#regular-time").hide();
+		
 	});
 	
 	$("#step3").click(function(){
-		if($("input[name='LUMS']").is(":checked") == false){
+		if(!checkStep2()){
 			alert("Please, complete previous steps first!");
-			return;
-		}
-		else if($("#confirm-place").html() == ""){
-			alert("Please, enter both source and destination!");
 			return;
 		}
 		goToByScroll("step1");
@@ -572,7 +562,7 @@ $(document).ready(function () {
 	});
 	
 	$("#step4").click(function(){
-		if($("input[name='gender']").is(":checked") == false || $("input[name='group']").is(":checked") == false || $("input[name='paid']").is(":checked") == false){
+		if(!checkStep3()){
 			alert("Please, complete previous steps first!");
 			return;
 		}
@@ -587,7 +577,7 @@ $(document).ready(function () {
 	});
 	
 	$("#step5").click(function(){
-		if($("#seats").val() == ""){
+		if(!checkStep4()){
 			alert("Please, complete previous steps first!");
 			return;
 		}
@@ -602,8 +592,9 @@ $(document).ready(function () {
 		current_step = 5;
 	});
 	
-	$("#confirm-button").click(function(){
-		if($("#name").val() == "Your name" || $("#email").val() == "Your email" || $("#telephone").val() == "Your telephone"){
+	$("#confirm-button").click(function(e){
+		e.preventDefault();
+		if(!checkStep5()){
 			alert("Please, complete previous steps first!");
 			return;
 		}
@@ -619,16 +610,31 @@ $(document).ready(function () {
 	
 	$("#confirm-place").click(function(e){
 		e.preventDefault();
-		$("#confirm-place").html("");
 		$("#searchTextField").show("slow");
 		$("#showmap").show("slow");
 		$("#show-directions").hide("slow");
+		$("#confirm-place").html("");
 		if(!initialized){
 			$("#selectLUMS").show("slow");
 			$("#map-canvas").show(300);
-			initialize_place();
+			initialize();
 			initialized = true;
 		}
+	});
+	
+	$("#send").click(function(e){
+		e.preventDefault();
+		var i;
+		
+		if(!(checkStep1() && checkStep2() && checkStep3() && checkStep4() && checkStep5())){
+			alert("Please Complete Previous Steps!");
+			return;
+		}
+		else{
+			//TODO
+			document.getElementById('info-form').submit();
+		}
+		
 	});
 	
 	$("#one-both-way").change(function(){
@@ -730,12 +736,12 @@ $(document).ready(function () {
 		code= (e.keyCode ? e.keyCode : e.which);
 		if (code == 13) 
 		{
-			if($("#place").val() == "")
+			if($("#searchTextField").val() == "")
 			{
 				alert("Please type in the place!");
 				e.preventDefault();
 			}
-			if($("#place").val() != "")
+			if($("#searchTextField").val() != "")
 			{
 				e.preventDefault();
 			}
@@ -779,7 +785,96 @@ $(document).ready(function () {
 		return temp;
 	}
 	
-	/*--- end  ---*/
+	/*--- end Time Start End Functions ---*/
+	
+	/*--- Start Step Checking Functions for Form Validation ---*/
+	
+	function checkStep1(){
+		if ($("#frequency1").is(":checked") == false && $("#frequency2").is(":checked") == false){
+			return false;
+		}
+		else if($("#frequency2").is(":checked") == true && $("#regularType1").is(":checked") == false && $("#regularType2").is(":checked") == false ){
+			return false;
+		}
+		else if(($("#regularType1").is(":checked")  == true || $("#regularType2").is(":checked")  == true) && !($("#day1").is(":checked") == true || $("#day2").is(":checked") == true 
+			|| $("#day3").is(":checked") == true || $("#day4").is(":checked") == true || $("#day5").is(":checked") == true || $("#day6").is(":checked") == true
+			|| $("#day7").is(":checked") == true)){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	function checkStep2(){
+		
+		if($("input[name='LUMS']").is(":checked") == false){
+			$("#place_entered").val("1");
+			return false;
+		}
+		else if($("#confirm-place").html() == ""){
+			$("#place_entered").val("2");
+			return false;
+		}
+		else if($("input[name='way']").is(":checked") == false){
+			$("#place_entered").val("3");
+			return false;
+		}
+		else if($('#frequency1').is(":checked") == true ){
+			if($("#oneway").is(":checked") == true){
+				if($("#datepicker1").val() == ""){
+					$("#place_entered").val("4");
+					return false;
+				}
+			}
+			else{
+				if($("#datepicker1").val() == "" || $("#datepicker2").val() == "" ){
+					$("#place_entered").val("5");
+					return false;
+				}
+			}
+		}
+		else if($("#datepicker4").val() == "" || $("#datepicker3").val() == "" ){
+			$("#place_entered").val("6");
+			return false;
+		}
+		else{
+			$("#place_entered").val("7");
+			return true;
+		}
+		return true;
+	}
+	
+	function checkStep3(){
+		if($("input[name='gender']").is(":checked") == false || $("input[name='group']").is(":checked") == false || $("input[name='paid']").is(":checked") == false){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	function checkStep4(){
+		if($("#seats").val() == ""){
+			$("#place_entered").val("8");
+			return false;
+		}
+		else{
+			$("#place_entered").val("9");
+			return true;
+		}
+	}
+	
+	function checkStep5(){
+		if($("#name").val() == "Your name" || $("#email").val() == "Your email" || $("#telephone").val() == "Your telephone"){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	/*--- end Step Checking Functions for Form Validation ---*/
 	
 });
 </script>
