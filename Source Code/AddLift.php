@@ -542,7 +542,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		var i;
 		
-		if(!(checkStep1() && checkStep2() && checkStep3() && checkStep4() && checkStep5())){
+		if(!(checkStep1() && checkStep2() && checkStep3() && checkStep4())){
 			alert("Please Complete Previous Steps!");
 			return;
 		}
@@ -624,6 +624,10 @@ $(document).ready(function () {
 	});
 	
 	
+	$("#datepicker1").focusout(function(){
+		if($("#datepicker1").val() != "")
+			$("#datepicker2").datepicker("option","minDate",$("#datepicker1").val());
+	});
 	
 	$('#datepicker2').focus(function(){
 		if($("#datepicker1").val() == ""){
@@ -631,16 +635,18 @@ $(document).ready(function () {
 			$(".datepicker").datepicker("hide");
 			return;
 		}
-		$("#datepicker2").datepicker("option","minDate",$("#datepicker1").val());
+		
 	});
-	
+	$("#datepicker3").focusout(function(){
+		if($("#datepicker3").val() != "")
+			$("#datepicker4").datepicker("option","minDate",$("#datepicker3").val());
+	});
 	$('#datepicker4').focus(function(){
 		if($("#datepicker3").val() == ""){
 			alert("Pick Start Date First!");
-			$(".datepicker").datepicker("hide");
+			$(".datepicker2").datepicker("hide");
 			return;
 		}
-		$("#datepicker4").datepicker("option","minDate",$("#datepicker3").val());
 	});
 	
 	
@@ -818,7 +824,7 @@ $(document).ready(function () {
 			</div>
 			<div id="content">
 				<div id="form1">
-				<form id = "info-form">
+				<form id = "info-form" method="POST" action ="Control.php">
 				<h5 id = "step1">Step 1: Schedule</h5>
 					<div id = "content1" class="step-content">
 						Once or Regularly:<br/>
@@ -828,13 +834,13 @@ $(document).ready(function () {
 						</div>
 						<div id = "weekly" >
 							<div id = "weekdays">
-								<input id="day1" name = "days" type = "checkbox" value = "Monday"/><label for="day1">Mon</label>
-								<input id="day2" name = "days" type = "checkbox" value = "Tuesday"/><label for="day2">Tue</label>
-								<input id="day3" name = "days" type = "checkbox" value = "Wednesday"/><label for="day3">Wed</label>
-								<input id="day4" name = "days" type = "checkbox" value = "Thursday"/><label for="day4">Thu</label>
-								<input id="day5" name = "days" type = "checkbox" value = "Friday"/><label for="day5">Fri</label>
-								<input id="day6" name = "days" type = "checkbox" value = "Saturday"/><label for="day6">Sat</label>
-								<input id="day7" name = "days" type = "checkbox" value = "Sunday"/><label for="day7">Sun</label>
+								<input id="day1" name = "day1" type = "checkbox" value = "Monday"/><label for="day1">Mon</label>
+								<input id="day2" name = "day2" type = "checkbox" value = "Tuesday"/><label for="day2">Tue</label>
+								<input id="day3" name = "day3" type = "checkbox" value = "Wednesday"/><label for="day3">Wed</label>
+								<input id="day4" name = "day4" type = "checkbox" value = "Thursday"/><label for="day4">Thu</label>
+								<input id="day5" name = "day5" type = "checkbox" value = "Friday"/><label for="day5">Fri</label>
+								<input id="day6" name = "day6" type = "checkbox" value = "Saturday"/><label for="day6">Sat</label>
+								<input id="day7" name = "day7" type = "checkbox" value = "Sunday"/><label for="day7">Sun</label>
 							</div>
 						</div>
 					</div>
@@ -850,7 +856,7 @@ $(document).ready(function () {
 							
 								<span id="destination-span">Destination</span>
 								<span id="source-span">Source</span>
-								<input id="searchTextField" type="text" size="50"/>
+								<input id="searchTextField" name="searchTextField" type="text" size="50"/>
 							
 								
 								<div id="map-canvas">
@@ -872,14 +878,14 @@ $(document).ready(function () {
 								</div>
 								<div id="singleLiftTime">
 									<div id="start-end-date">
-										<label for="datepicker1" id="label-datepicker1">Start Date: </label><input type="text" id="datepicker1" class="datepicker" onfocus="this.blur()"/>
-										<label for="datepicker2" id="label-datepicker2">End Date: </label><input type="text" id="datepicker2" class="datepicker" onfocus="this.blur()"/>
+										<label for="datepicker1" id="label-datepicker1">Start Date: </label><input type="text" id="datepicker1" name="datepicker1" class="datepicker" onfocus="this.blur()"/>
+										<label for="datepicker2" id="label-datepicker2">End Date: </label><input type="text" id="datepicker2" name="datepicker2" class="datepicker" onfocus="this.blur()"/>
 										<br/>
 									</div>
 								</div>
 								<div id="regularLiftTime">
-										Period From: <input type="text" id="datepicker3" class="datepicker2" onfocus="this.blur()"/>
-										Period To: <input type="text" id="datepicker4" class="datepicker2" onfocus="this.blur()"/>
+										Period From: <input type="text" id="datepicker3" name="datepicker3" class="datepicker2" onfocus="this.blur()"/>
+										Period To: <input type="text" id="datepicker4" name="datepicker4" class="datepicker2" onfocus="this.blur()"/>
 										<br/>
 								</div>
 							</div>
@@ -931,14 +937,14 @@ $(document).ready(function () {
 					<h5 id="step4">Step 4: Additional Information</h5>
 						<div id="content4" class="step-content">
 							Vehicle:
-							<select class = "select-vehicle">
+							<select name="vehicle" class = "select-vehicle">
 								<option value="car">Car</option>
 								<option value="Motorbike">Motorbike</option>
 								<option value="Other">Other</option>
 							</select>
 							<span id="select-seats">
 							Free Seats:
-							<select id="seats" class = "select-seats">
+							<select id="seats" name="seats" class = "select-seats">
 								<option id="seats0" value=""></option>
 								<option id="seats1" value="1">1</option>
 								<option id="seats2" value="2">2</option>
@@ -958,9 +964,7 @@ $(document).ready(function () {
 						<button id="confirm-button" class="button2" text="Confirmation">Confirmation</button>
 						<div style ="background-color: #9CCFFF;">
 							<div id="confirm-menu">
-								<p1>Type in your email again:</p1><br/>
-								<input id="confirm-email" type="text" name="confirm-email"/>
-								<br/>
+								
 								<br/>
 								<button id="send" class="button">SEND</button>
 							</div>
@@ -970,14 +974,14 @@ $(document).ready(function () {
 				
 				
 				<div>
-					<input type="hidden" id="lat_Destination" value=""/>
-					<input type="hidden" id="lng_Destination" value=""/>
-					<input type="hidden" id="lat_Departure" value=""/>
-					<input type="hidden" id="lng_Departure" value=""/>
-					<input type="hidden" id="place_entered">
-					<input type="hidden" id="start" value=""/>
-					<input type="hidden" id="end" value=""/>
-					<input type="hidden" id="frompage" value="addlift"/>
+					<input type="hidden" name="lat_Destination" id="lat_Destination" value=""/>
+					<input type="hidden" name="lng_Destination" id="lng_Destination" value=""/>
+					<input type="hidden" name="lat_Departure" id="lat_Departure" value=""/>
+					<input type="hidden" name="lng_Departure" id="lng_Departure" value=""/>
+					<input type="hidden" name="place_entered" id="place_entered">
+					<input type="hidden" name="start" id="start" value=""/>
+					<input type="hidden" name="end" id="end" value=""/>
+					<input value="addlift" type="hidden" name="frompage" id="frompage" />
 				</div>
 				</form>
 				</div>

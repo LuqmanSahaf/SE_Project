@@ -20,7 +20,7 @@ function query($q) {
   global $conn;
   $result = OCIParse($conn, $q);
 
-OCIExecute($result, OCI_DEFAULT);
+OCI_Execute($result, OCI_COMMIT_ON_SUCCESS);
   if (!$result) {
 	
     die("Invalid query -- $q -- " .oci_error());
