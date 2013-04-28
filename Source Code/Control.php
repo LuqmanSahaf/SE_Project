@@ -1,6 +1,7 @@
 <?php
 
-
+	require_once 'status.php';
+	require_once 'db.php';
 	
 	array $pages;
 	var $_loggedIn;
@@ -26,7 +27,7 @@
 		$logged_in = "0";
 	}
 	
-	if($_POST['page'] == "add a lift")
+	if($_POST['page'] == "addlift")
 	{
 		addLift();
 	}

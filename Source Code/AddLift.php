@@ -235,7 +235,7 @@ $(document).ready(function () {
 				}
 				else var confirmButton = "Your place was not found! Please try again - ";
 				
-				infowindow.setContent(confirmButton+"<strong>"+formaddr+"</strong>");
+				infowindow.setContent(confirmButton+'<strong id="place-to-confirm">'+formaddr+"</strong>");
 				$("#place-entered").val($("#searchTextField").prop("value"));
 				infowindow.open(map3, marker);
 			}
@@ -288,10 +288,10 @@ $(document).ready(function () {
 		
 		if($("#LUMS1").is(":checked") == true){
 			$("#start").val("Lahore University of Management Sciences, Lahore, Pakistan");			
-			$("#end").val($("#searchTextField").prop("value"));
+			$("#end").val($("#place-to-confirm").html());
 			$("#confirm-place").html("Destination:   "+$("#end").val());
 		}else{
-			$("#start").val($("#searchTextField").prop("value"));			
+			$("#start").val($("#place-to-confirm").html());			
 			$("#end").val("Lahore University of Management Sciences, Lahore, Pakistan");
 			$("#confirm-place").html("Departure:   "+$("#start").val());
 		}
