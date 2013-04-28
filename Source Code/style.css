@@ -7,7 +7,15 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-	background: #C5DA99 url(images/img09.png) repeat;
+background: rgb(192,221,119); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(192,221,119,1) 0%, rgba(138,182,107,1) 44%, rgba(67,120,15,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(192,221,119,1)), color-stop(44%,rgba(138,182,107,1)), color-stop(100%,rgba(67,120,15,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0dd77', endColorstr='#43780f',GradientType=0 ); /* IE6-9 */
+
 	font-family: 'Abel', sans-serif;
 	font-size: 16pt;
 	color: #000033;
@@ -81,8 +89,6 @@ a:hover {
 	overflow: hidden;
 	height: 150px;
 	padding: 30px 0px 0px 0px;
-	background: url(images/img09.png) repeat;
-
 }
 
 
@@ -238,7 +244,6 @@ a:hover {
 
 #page {
 	width: 1000px;
-	min-height: 2000px;
 	overflow:visible;
 	margin: 60px auto 0 auto;
 	padding: 30px 50px;
@@ -257,7 +262,7 @@ a:hover {
 #content {
 	float: left;
 	width: 900px;
-	height: 1000px;
+
 	padding: 0px;
 	margin-bottom:50px;
 }
@@ -456,19 +461,26 @@ a:hover {
 
 #column1 {
 	float: left;
-	width: 290px;
-	margin-right: 30px;
+	margin-left:50px;
+	width:40%;
 }
 
 #column2 {
-	float: left;
-	width: 280px;
+	float: right;
+	width:40%;
 }
 
 #column3 {
-	float: right;
-	width: 260px;
+	float: left;
+	width:40%;
+	margin-left:50px;
 }
+#column4 {
+	float: right;
+
+	width:40%;
+}
+
 
 /* Footer */
 
@@ -555,21 +567,6 @@ a:hover {
 	font-size: 30px;
 }
 
-#three-columns #column1 {
-	float: left;
-	width: 500px;
-	margin-right: 50px;
-}
-
-#three-columns #column2 {
-	float: left;
-	width: 400px;
-}
-
-#three-columns #column3 {
-	float: right;
-	width: 300px;
-}
 #map-canvas {
 	height: 275px;
 	width: 800px;
@@ -713,9 +710,17 @@ p1{
 	width:45%;
 }
 
-
-
-
 .ui-widget{
 	font-size:0.6em;
+}
+
+.info{
+
+}
+
+.update{
+}
+
+.clear{
+	clear:both;
 }
