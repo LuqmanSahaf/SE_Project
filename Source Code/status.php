@@ -7,12 +7,10 @@ session_start();
 
 if(!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
 
-?>
-<center><h1>invalid session!</h1><br />
-<?php
 	header("Location: loginForm.php");
 	exit();
 }
+
 
 ?>
 </body>

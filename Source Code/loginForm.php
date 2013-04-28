@@ -60,7 +60,10 @@ Released   : 20120902
 				<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
 				<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
 				<?php
+					// require_once 'status.php';
+					
 					if(isset($_POST["invalid"])){
+						
 						echo("The username or password entered is incorrect");
 					}
 				?>		

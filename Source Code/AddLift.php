@@ -20,10 +20,9 @@ Released   : 20120902
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://maps.google.com/maps/api/js?sensor=true&libraries=places" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 <script type = "text/javascript">
@@ -450,43 +449,7 @@ $(document).ready(function () {
 		}
 		
 	});
-	//functions for name,email,telephone textareas focussing!!!
-	$("#name, #email, #telephone").focusin(function(){
-
-		if($(this).attr("id") == "name" && $(this).prop("value") == "Your name")
-		{
-			$(this).prop("value", "");
-		}
-		else if($(this).attr("id") == "email" && $(this).prop("value") == "Your email")
-		{
-			$(this).prop("value", "");
-			$("#confirm-button").show("slow");
-		}
-		else if($(this).attr("id") == "telephone" && $(this).prop("value") == "Your telephone")
-		{
-			$(this).prop("value", "");
-		}
-	}).focusout(function() {
-		
-		$(this).attr("value", $(this).prop("value"));
-		
-		var trimmed = $.trim($(this).prop("value"));
-		$(this).attr("value", trimmed).prop("value", trimmed);
-		
-		if($(this).attr("id") == "name" && $(this).attr("value") == "")
-		{
-			$(this).attr("value", "Your name").prop("value", "Your name");
-		}
-		else if($(this).attr("id") == "email" && $(this).attr("value") == "")
-		{
-			$(this).attr("value", "Your email").prop("value", "Your email");
-		}
-		else if($(this).attr("id") == "telephone" && $(this).attr("value") == "")
-		{
-			$(this).attr("value", "Your telephone").prop("value", "Your telephone");
-		}
-		
-	});
+	
 	
 	$("#step1").click(function(){
 		goToByScroll("step1");
@@ -576,29 +539,20 @@ $(document).ready(function () {
 		content_step = 4;
 	});
 	
-	$("#step5").click(function(){
+	$("#seats").change(function(){
+		$("#confirm-div").show("slow");
+		$("#confirm-button").show("slow");
+	});
+	
+	
+	
+	$("#confirm-button").click(function(e){
+		e.preventDefault();
 		if(!checkStep4()){
 			alert("Please, complete previous steps first!");
 			return;
 		}
-		goToByScroll("step1");
-		$("#content5").slideDown("slow");
-		$("#content4").slideUp("slow");
-		$("#content1").hide("slow");
-		$("#content2").hide("slow");
-		$("#content3").hide("slow");
-		// $("#confirm-menu").hide("slow");
-		
-		current_step = 5;
-	});
-	
-	$("#confirm-button").click(function(e){
-		e.preventDefault();
-		if(!checkStep5()){
-			alert("Please, complete previous steps first!");
-			return;
-		}
-		goToByScroll("step5");
+		goToByScroll("step4");
 		$("#confirm-menu").slideDown("slow");
 		$("#content5").slideUp("slow");
 		$("#content1").hide("slow");
@@ -730,7 +684,7 @@ $(document).ready(function () {
 	
 	/*--- end Date Picker Function---*/
 	
-	$(document).on("keydown", "#searchTextField,#telephone,#email,#name,#details", function(e) 
+	$(document).on("keydown", "#searchTextField", function(e) 
 	{
 		var code =null;
 		code= (e.keyCode ? e.keyCode : e.which);
@@ -846,7 +800,7 @@ $(document).ready(function () {
 	}
 	
 	function checkStep3(){
-		if($("input[name='gender']").is(":checked") == false || $("input[name='group']").is(":checked") == false || $("input[name='paid']").is(":checked") == false){
+		if($("input[name='gender']").is(":checked") == false || $("input[name='group']").is(":checked") == false || $("input[name='paid']").is(":checked") == false || $("input[name='school']").is(":checked") == false){
 			return false;
 		}
 		else{
@@ -865,14 +819,7 @@ $(document).ready(function () {
 		}
 	}
 	
-	function checkStep5(){
-		if($("#name").val() == "Your name" || $("#email").val() == "Your email" || $("#telephone").val() == "Your telephone"){
-			return false;
-		}
-		else{
-			return true;
-		}
-	}
+	
 	
 	/*--- end Step Checking Functions for Form Validation ---*/
 	
@@ -890,7 +837,6 @@ $(document).ready(function () {
 			<div id="menu">
 			  <ul>
 					<li ><a href="home.php">Home</a></li>
-					<li><a href="credits.html">Credits</a></li>
 					<li><a href="logout.php">Logout</a></li>
 <!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
@@ -1016,7 +962,12 @@ $(document).ready(function () {
 						<input name="group" type ="radio" id="group1" value="student"/><label for="group1">Student</label>
 						<input name="group" type ="radio" id="group2" value="faculty"/><label for="group2">Faculty or Staff</label>
 						<input name="group" type ="radio" id="group3" value="nomatter"/><label for="group3">Doesn't matter</label>
-						<br/>
+						<br/><br/>
+						<input name="school" type ="radio" id="school1" value="sse"/><label for="school1">SSE</label>
+						<input name="school" type ="radio" id="school2" value="shssl"/><label for="school2">SHSSL</label>
+						<input name="school" type ="radio" id="school3" value="sdsb"/><label for="school3">SDSB</label>
+						<input name="school" type ="radio" id="school4" value="nomatter"/><label for="school4">Doesn't matter</label>
+						<br/><br/>
 						Do you want the trip to be paid?<br/>
 						<input id="paid1" type="radio" name="paid" value="0"/><label for="paid1">Yes</label>
 						<input id="paid2" type="radio" name="paid" value="1"/><label for="paid2">No</label>
@@ -1048,20 +999,7 @@ $(document).ready(function () {
 							</select>
 							</span>
 						</div>
-					<h5 id="step5">Step 5: Contact Information</h5>
-						<div id="content5" class ="step-content">
-							<textarea name="details" class="text-input" id="details">Details (optional)</textarea>
-							<div class="contactInfo">
-								<div class="contactContName">
-									<input class="text-input" type="text" name="name" id="name" value="Your name"  />
-								</div>
-							</div>
-							<div class="contactInfo">
-								<input class="text-input1" type="text" name="email" id="email" value="Your email"/>
-								<input class="text-input2" type="text" name="telephone" id="telephone" value="Your telephone"/>
-							</div>
 					
-						</div>
 					<div id="confirm-div">
 						<button id="confirm-button" class="button2" text="Confirmation">Confirmation</button>
 						<div style ="background-color: #9CCFFF;">
@@ -1078,13 +1016,13 @@ $(document).ready(function () {
 				
 				
 				<div>
-					<input type="text" id="lat_Destination" value=""/>
-					<input type="text" id="lng_Destination" value=""/>
-					<input type="text" id="lat_Departure" value=""/>
-					<input type="text" id="lng_Departure" value=""/>
-					<input type="text" id="place_entered">
-					<input type="text" id="start" value=""/>
-					<input type="text" id="end" value=""/>
+					<input type="hidden" id="lat_Destination" value=""/>
+					<input type="hidden" id="lng_Destination" value=""/>
+					<input type="hidden" id="lat_Departure" value=""/>
+					<input type="hidden" id="lng_Departure" value=""/>
+					<input type="hidden" id="place_entered">
+					<input type="hidden" id="start" value=""/>
+					<input type="hidden" id="end" value=""/>
 				</div>
 				</form>
 				</div>
