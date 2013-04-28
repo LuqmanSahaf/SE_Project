@@ -7,15 +7,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-background: rgb(192,221,119); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(192,221,119,1) 0%, rgba(138,182,107,1) 44%, rgba(67,120,15,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(192,221,119,1)), color-stop(44%,rgba(138,182,107,1)), color-stop(100%,rgba(67,120,15,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(192,221,119,1) 0%,rgba(138,182,107,1) 44%,rgba(67,120,15,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0dd77', endColorstr='#43780f',GradientType=0 ); /* IE6-9 */
-
+	background-image:url(images/img01.png);
 	font-family: 'Abel', sans-serif;
 	font-size: 16pt;
 	color: #000033;
@@ -51,6 +43,12 @@ foobar{
 h3 {
 	font-size: 1.6em;
 }
+h4{
+	font-size:1.4em;
+}
+h5{
+	font-size:1em;
+}
 
 p, ul, ol {
 	margin-top: 0;
@@ -66,7 +64,10 @@ a {
 }
 
 a:hover {
+	color: #0f0;
 }
+
+
 
 #wrapper {
 
@@ -219,19 +220,21 @@ a:hover {
 	margin-right: 1px;
 	padding: 0px 20px 0px 20px;
 	text-decoration: none;
+	font-weight:bold;
 	text-align: center;
 	text-shadow: 1px 1px 0px rgba(0,0,0,.2);
 	text-transform: uppercase;
 	font-family: 'Abel', sans-serif;
 	font-size: 16px;
-	font-weight: 300;
+
 	color: #FFFFFF;
 	border: none;
 }
 
 #menu a:hover, #menu .current_page_item a {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: #7a7;
+	transition: all 500ms ease;
 }
 
 #menu .current_page_item a {
@@ -240,6 +243,12 @@ a:hover {
 /* Page */
 #ajeeb{
 	width: 150px;
+}
+
+.loginForm {
+	width:30%;
+	margin:0 auto;
+	
 }
 
 #page {
@@ -267,13 +276,42 @@ a:hover {
 	margin-bottom:50px;
 }
 
-#form1{
-	
+.content{
+	padding-bottom:30px;
+	border-bottom: 1px solid #E7EBED;
+}
+
+#info{
+    width:50%;
+    margin:0 auto;
+/*    border: 1px solid;*/
+}
+.profile-table {
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    border-collapse: separate;
+    border-spacing: 2em;
+    width:100%;
+}
+.edit-button{
+	float:right;
+}
+#update{
+	display:none;
+	width:50%;
+	margin:0 auto;
+	/*visibility:hidden;*/
+}
+
+.profile-update input{
+	padding:5px 5px;
+	margin:15px 5px;
 }
 
 .post {
-	margin-bottom: 40px;
+	width:100%;
 	border-bottom: 1px solid #E7EBED;
+	padding-bottom: 20px;
 }
 
 .post .title {
@@ -614,7 +652,7 @@ a:hover {
 }
 
 h5{
-	background: none repeat scroll 0% 0% rgb(176,176,224);
+	background: none repeat scroll 0% 0% rgb(176,224,176);
 	min-width: 500px;
 	cursor:pointer;
 }
@@ -714,12 +752,7 @@ p1{
 	font-size:0.6em;
 }
 
-.info{
 
-}
-
-.update{
-}
 
 .clear{
 	clear:both;

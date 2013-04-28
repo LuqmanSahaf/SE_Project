@@ -24,6 +24,12 @@ Released   : 20120902
 
 </head>
 <body>
+<?php 
+	require_once 'status.php';
+	require_once 'db.php';
+	$username = $_SESSION['username'];
+					
+?>
 <div id="wrapper">
   <div id="header-wrapper">
 		<div id="header" class="container">
@@ -32,8 +38,9 @@ Released   : 20120902
 			</div>
 			<div id="menu">
 			  <ul>
-					<li ><a href="home.php">Home</a></li>
+					<li><a href="home.php">Home</a></li>
 					<li><a href="addLift.php">Advertise New</a></li>
+					<li><a href="profile.php">Profile</a></li>
 					<li><a href="logout.php">Logout</a></li>
 			  </ul>
 			</div>
@@ -82,9 +89,9 @@ Released   : 20120902
 	  
 		<!-- end #content --><!-- end #sidebar -->
 		<div style="clear: both;">&nbsp;</div>
-  </div>
-	<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	</div>
+	<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
+</div>
 	<!-- end #header -->
 
 	

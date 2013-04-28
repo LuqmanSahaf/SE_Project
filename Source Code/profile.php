@@ -22,8 +22,34 @@ Released   : 20120902
 
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 
+<script>
+function displayEdit()
+{
+document.getElementById("update").style.display='block';
+document.getElementById("info").style.display='none';
+}
+
+/*
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+*/
+</script>
+
 </head>
 <body>
+<?php 
+	require_once 'status.php';
+	require_once 'db.php';
+	$username = $_SESSION['username'];
+					
+?>
 <div id="wrapper">
   <div id="header-wrapper">
 		<div id="header" class="container">
@@ -32,12 +58,14 @@ Released   : 20120902
 			</div>
 			<div id="menu">
 			  <ul>
-					<li ><a href="home.php">Home</a></li>
-					<li><a href="credits.html">Credits</a></li>
+					<li><a href="home.php">Home</a></li>
+					<li><a href="addLift.php">Advertise New</a></li>
+					<li><a href="profile.php">Profile</a></li>
 					<li><a href="logout.php">Logout</a></li>
 			  </ul>
 			</div>
 		</div>
+		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	</div>
 	<div id="page">
 		
@@ -50,15 +78,42 @@ Released   : 20120902
 		</div>
 		
 		<div class="content">
-			<div class="info">
-				<table>
-					<tr> </tr>
+			<div id="info">
+				<table class="profile-table">
+				<?php
+
+					$result=query("select * from USERS where USERNAME=".$_SESSION['username']);
+					while(ocifetch($result)){
+						for ($i = 2; $i <= oci_num_fields($result); ++$i) {
+							if ($i==3) continue;
+							$field=oci_field_name($result, $i);
+							echo ("<tr> <td>".$field."</td><td>");
+							echo (ociresult($result,$field));
+							echo ("</td></tr>");
+						}
+						//it will print all users in db
+					}
+				?>
 				</table>
+				<form class="edit-button"> <input type="button" name="edit" value="Edit Profile" onClick="displayEdit()"></form>
 			<!--Fetch Data from the database -->
 			</div>
-			<div class="update">
-				<form>
-					
+			<div id="update">
+				<h4>Update profile info:</h4>
+				
+				<?php $result=query("select * from USERS where USERNAME=".$_SESSION['username']);
+					ocifetch($result);?>
+				<form class="profile-update" action="update.php" method="POST">
+					Full Name:<input type="text" name="fullname" value='<?php print ociresult($result,"NAME");?>'> <br>
+					Gender:<input type="radio" name="sex" value="M" checked> Male
+						<input type="radio" name="sex" value="F"> Female <br>
+					Designation:<input type="radio" name="designation" value="student" checked> Student
+						<input type="radio" name="designation" value="faculty"> Faculty
+						<input type="radio" name="designation" value="staff"> Staff <br>
+					Cell Phone:<input type="text" name="cell" value='<?php echo ociresult($result,"CELL")?>'> <br>
+					Email:<input type="text" name="email" value='<?php echo ociresult($result,"EMAIL")?>'> <br>
+					<input type="hidden" name="username" value='<?php echo ociresult($result,"USERNAME")?>' >
+					<input type="submit" value="Update">
 				</form>
 			</div>
 			<br class="clear" />
