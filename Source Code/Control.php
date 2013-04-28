@@ -25,9 +25,9 @@
 	}
 	
 	function addLift($user_id){
-		$source;$destination;$frequency;$way;$group;$paid;$gender;$school="nomatter";
+		$source;$destination;$frequency;$way;$group;$paid;$gender;$school="";
 		$mon='0';$tue='0';$wed='0';$thu='0';$fri='0';$sat='0';$sun='0';$vehicle;$seats;
-		$startdate="";$enddate="";$starttime="";$endtime="";$mon_start=null;$mon_end=null;$tue_start=null;$tue_end=null;
+		$startdate="";$enddate="";$starttime=null;$endtime=null;$mon_start=null;$mon_end=null;$tue_start=null;$tue_end=null;
 		$wed_start=null;$wed_end=null;$thu_start=null;$thu_end=null;$fri_start=null;
 		$fri_end=null;$sat_start=null;$sat_end=null;$sun_start=null;$sun_end=null;
 		
@@ -61,8 +61,12 @@
 				$frequency = SINGLE;
 				$startdate = $_POST['datepicker1'];
 				$enddate = $_POST['datepicker2'];
-				$starttime = $_POST['start-time-hr']+":"+$_POST['start-time-min'];
-				$endtime = $_POST['back-time-hr']+":"+$_POST['back-time-min'];
+				$temp_hr = $_POST['start-time-hr1'];
+				$temp_min = $_POST['start-time-min1'];
+				$starttime = "$temp_hr:$temp_min";
+				$temp_hr = $_POST['back-time-hr'];
+				$temp_min = $_POST['back-time-min1'];
+				$endtime = "$temp_hr:$temp_min";
 				
 			}else{
 				if(!(isset($_POST['datepicker4']) && isset($_POST['datepicker3']))){
@@ -72,40 +76,69 @@
 				$frequency = WEEKLY;
 				$startdate = $_POST['datepicker3'];
 				$enddate = $_POST['datepicker4'];
+				
 				if(isset($_POST['day1'])){
 					$mon = '1';
-					$mon_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$mon_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST['start-time-hr1'];
+					$temp_min = $_POST['start-time-min1'];
+					$mon_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST['back-time-hr1'];
+					$temp_min = $_POST['back-time-min1'];
+					$mon_end = "$temp_hr:$temp_min";
 				}
 				if(isset($_POST['day2'])){
 					$tue = '1';
-					$tue_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$tue_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST['start-time-hr2'];
+					$temp_min = $_POST['start-time-min2'];
+					$tue_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST['back-time-hr2'];
+					$temp_min = $_POST['back-time-min2'];
+					$tue_end = "$temp_hr:$temp_min";
 				}
 				if(isset($_POST['day3'])){
 					$wed = '1';
-					$wed_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$wed_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST["start-time-hr3"];
+					$temp_min = $_POST["start-time-min3"];
+					$wed_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST["back-time-hr3"];
+					$temp_min = $_POST["back-time-min3"];
+					$wed_end = "$temp_hr:$temp_min";
 				}
 				if(isset($_POST['day4'])){
 					$thu = '1';
-					$thu_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$thu_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST["start-time-hr4"];
+					$temp_min = $_POST["start-time-min4"];
+					$thu_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST["back-time-hr4"];
+					$temp_min = $_POST["back-time-min4"];
+					$thu_end = "$temp_hr:$temp_min";
 				}
 				if(isset($_POST['day5'])){
 					$fri = '1';
-					$fri_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$fri_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST["start-time-hr5"];
+					$temp_min = $_POST["start-time-min5"];
+					$fri_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST["back-time-hr5"];
+					$temp_min = $_POST["back-time-min5"];
+					$fri_end = "$temp_hr:$temp_min";
 				}
 				if(isset($_POST['day6'])){
 					$sat = '1';
-					$sat_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$sat_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST["start-time-hr6"];
+					$temp_min = $_POST["start-time-min6"];
+					$sat_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST["back-time-hr6"];
+					$temp_min = $_POST["back-time-min6"];
+					$sat_end = "$temp_hr:$temp_min";
 				}
 				if(isset($_POST['day7'])){
 					$sun = '1';
-					$sun_start = $_POST["start-time-hr1"]+":"+$_POST["start-time-min1"];
-					$sun_end = $_POST["back-time-hr1"]+":"+$_POST["back-time-min1"];
+					$temp_hr = $_POST["start-time-hr7"];
+					$temp_min = $_POST["start-time-min7"];
+					$sun_start = "$temp_hr:$temp_min";
+					$temp_hr = $_POST["back-time-hr7"];
+					$temp_min = $_POST["back-time-min7"];
+					$sun_end = "$temp_hr:$temp_min";
 				}
 				
 			}
@@ -125,6 +158,7 @@
 				$group = NOMATTER;
 			
 			
+			$school = $_POST['school'];
 			$paid = $_POST['paid'];
 			$vehicle = $_POST['vehicle'];
 			$seats = $_POST['seats'];
@@ -136,7 +170,7 @@
 			return false;
 		}
 		
-		$query = "insert into LIFTS (lift_id,liftprovider,source,destination,frequency,way,
+		$query = "insert INTO LIFTS (lift_id,liftprovider,source,destination,frequency,way,
 		startdate,enddate,starttime,endtime,mon,tue,wed,thu,fri,sat,sun,mon_start,tue_start,wed_start,thu_start,
 		fri_start,sat_start,sun_start,mon_end,tue_end,wed_end,thu_end,fri_end,sat_end,sun_end,gender,liftgroup,
 		school,paid,vehicle,freeseats) 
@@ -144,10 +178,10 @@
 		'".$enddate."','".$starttime."','".$endtime."','$mon','$tue','$wed','$thu','$fri','$sat','$sun',
 		'".$mon_start."','".$tue_start."','".$wed_start."','".$thu_start."','".$fri_start."','".$sat_start."','".$sun_start."',
 		'".$mon_end."','".$tue_end."','".$wed_end."','".$thu_end."','".$fri_end."','".$sat_end."','".$sun_end."',
-		'$gender','$group','$school','$paid','".$vehicle."','$seats')";
-		
+		'$gender','$group','$school','$paid','".$vehicle."','$seats') ";
+		echo($query);
 		$result = query($query);
-		if(!result){
+		if(!$result){
 			ocirollback();
 			return false;
 		}

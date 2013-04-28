@@ -65,19 +65,21 @@ create table lifts(
 
 
 
-
+delete from lifts;
 commit;
 
 
 
 
 select * from users;
-
+select * from lifts;
 
 select * from USERS where username = '14100180' and password = '14100180';
 
 select NAME,EMAIL FROM USERS where USERNAME = '14100180' and PASSWORD = '14100180';
 
+
+drop sequence lifts_sequence;
 
 Create Sequence lifts_sequence
 start with 0

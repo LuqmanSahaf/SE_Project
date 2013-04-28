@@ -288,10 +288,10 @@ $(document).ready(function () {
 		
 		if($("#LUMS1").is(":checked") == true){
 			$("#start").val("Lahore University of Management Sciences, Lahore, Pakistan");			
-			$("#end").val($("#place-to-confirm").html());
+			$("#end").val($("#searchTextField").prop("value"));
 			$("#confirm-place").html("Destination:   "+$("#end").val());
 		}else{
-			$("#start").val($("#place-to-confirm").html());			
+			$("#start").val($("#searchTextField").prop("value"));			
 			$("#end").val("Lahore University of Management Sciences, Lahore, Pakistan");
 			$("#confirm-place").html("Departure:   "+$("#start").val());
 		}
@@ -344,7 +344,7 @@ $(document).ready(function () {
 	var temp = '<div style="min-width:850px;min-height:20px;" id="head"><span id = "day-for-time'+k+'" class="days" >Day</span><div id="start-time-regular'+k+'" class="start-time">Start Time</div><span id="end-time-regular'+k+'"  class="end-time">End Time</span></div>';
 	
 	
-	for(k=1; k<=7; k++){
+	for(k=1; k<8; k++){
 		temp += '<div style="min-width:850px;min-height:20px;" id="days-time'+k+'"><span id = "day-for-time'+k+'" class="days" >'+array_days[k-1]+'</span><div id="start-time-regular'+k+'" class="start-time">'+startTimeFor(k)+'</div><span id="end-time-regular'+k+'"  class="end-time">'+backTimeFor(k)+'</span></div>';
 	}
 	
@@ -353,11 +353,11 @@ $(document).ready(function () {
 	
 	$("#start-time").append(startTime);
 	$("#end-time").append(backTime);
-	
-	$('#destination-span,#weekly,#Date,#label-datepicker2,#label-datepicker1,#start-time,#end-time,#source-span,#selectLUMS,#searchTextField,#showmap,#show-directions,#confirm-menu,#confirm-button,#content1,#content2,#content3,#content4,#content5,#Date,#Time,#singleLiftTime,#regularLiftTime,#single-time,#regular-time,#datepicker1,#datepicker2,#datepicker3,#datepicker4').hide();
-	for(k=1; k<7; k++){
-		$('#days-time'+k).hide();
+	for(k=1; k<8; k++){
+		$('#days-time'+k).hide("fast");
 	}
+	$('#destination-span,#weekly,#Date,#label-datepicker2,#label-datepicker1,#start-time,#end-time,#source-span,#selectLUMS,#searchTextField,#showmap,#show-directions,#confirm-menu,#confirm-button,#content1,#content2,#content3,#content4,#content5,#Date,#Time,#singleLiftTime,#regularLiftTime,#single-time,#regular-time,#datepicker1,#datepicker2,#datepicker3,#datepicker4').hide();
+	
 	
 	goToByScroll("header");
 	
@@ -468,6 +468,7 @@ $(document).ready(function () {
 		$("#regular-time").hide();
 		document.getElementById('oneway').checked = false;
 		document.getElementById('bothway').checked = false;
+		date_changed = true;
 		
 	});
 	
@@ -574,13 +575,13 @@ $(document).ready(function () {
 				$("#regular-time").show("fast");
 				
 				var i;
-				for(i=0; i < 8; i++){
+				for(i=1; i < 8; i++){
 					$("#end-time-regular"+i).hide("slow");
 				}
 			}
 		}else{
 			var i=0;
-			$("#end-time-regular"+i).show("fast");
+			
 			for(i=1; i < 8; i++){
 				if($("#day"+i).is(":checked") == true)
 					$("#end-time-regular"+i).show("fast");
@@ -623,29 +624,41 @@ $(document).ready(function () {
 		dateFormat: "dd-mm-yy",
 	});
 	
+	var date_changed = false;
 	
 	$("#datepicker1").focusout(function(){
-		if($("#datepicker1").val() != "")
+		if($("#datepicker1").val() != ""){
 			$("#datepicker2").datepicker("option","minDate",$("#datepicker1").val());
+			date_changed = true;			
+		}
 	});
 	
-	$('#datepicker2').focus(function(){
+	$('#datepicker2').click(function(){
 		if($("#datepicker1").val() == ""){
 			alert("Pick Start Date First!");
 			$(".datepicker").datepicker("hide");
 			return;
 		}
-		
+		if(!date_changed){
+			$("#datepicker2").datepicker("option","minDate",$("#datepicker1").val());
+			date_changed = true;
+		}
 	});
-	$("#datepicker3").focusout(function(){
-		if($("#datepicker3").val() != "")
+	$("#datepicker3").change(function(){
+		if($("#datepicker3").val() != ""){
 			$("#datepicker4").datepicker("option","minDate",$("#datepicker3").val());
+			date_changed = true;
+		}
 	});
-	$('#datepicker4').focus(function(){
+	$('#datepicker4').click(function(){
 		if($("#datepicker3").val() == ""){
 			alert("Pick Start Date First!");
 			$(".datepicker2").datepicker("hide");
 			return;
+		}
+		if(!date_changed){
+			$("#datepicker4").datepicker("option","minDate",$("#datepicker3").val());
+			date_changed = true;
 		}
 	});
 	
@@ -929,8 +942,8 @@ $(document).ready(function () {
 						<input name="school" type ="radio" id="school4" value="nomatter"/><label for="school4">Doesn't matter</label>
 						<br/><br/>
 						Do you want the trip to be paid?<br/>
-						<input id="paid1" type="radio" name="paid" value="0"/><label for="paid1">Yes</label>
-						<input id="paid2" type="radio" name="paid" value="1"/><label for="paid2">No</label>
+						<input id="paid1" type="radio" name="paid" value="1"/><label for="paid1">Yes</label>
+						<input id="paid2" type="radio" name="paid" value="0"/><label for="paid2">No</label>
 						<br/>
 						
 						</div>
