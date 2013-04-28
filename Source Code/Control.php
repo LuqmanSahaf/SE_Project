@@ -27,7 +27,7 @@
 		$logged_in = "0";
 	}
 	
-	if($_POST['page'] == "addlift")
+	if($_POST['frompage'] == "addlift")
 	{
 		addLift();
 	}

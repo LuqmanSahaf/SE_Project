@@ -354,7 +354,7 @@ $(document).ready(function () {
 	$("#start-time").append(startTime);
 	$("#end-time").append(backTime);
 	
-	$('#regular,#destination-span,#Date,#label-datepicker2,#label-datepicker1,#start-time,#end-time,#source-span,#selectLUMS,#searchTextField,#showmap,#show-directions,#confirm-menu,#confirm-button,#content1,#content2,#content3,#content4,#content5,#Date,#Time,#singleLiftTime,#regularLiftTime,#single-time,#regular-time,#datepicker1,#datepicker2,#datepicker3,#datepicker4').hide();
+	$('#destination-span,#weekly,#Date,#label-datepicker2,#label-datepicker1,#start-time,#end-time,#source-span,#selectLUMS,#searchTextField,#showmap,#show-directions,#confirm-menu,#confirm-button,#content1,#content2,#content3,#content4,#content5,#Date,#Time,#singleLiftTime,#regularLiftTime,#single-time,#regular-time,#datepicker1,#datepicker2,#datepicker3,#datepicker4').hide();
 	for(k=1; k<7; k++){
 		$('#days-time'+k).hide();
 	}
@@ -367,7 +367,7 @@ $(document).ready(function () {
 
 	
 	$("#frequency2").click(function(){
-		$("#regular").show(300);
+		$("#weekly").show(300);
 		$("#map-canvas").show(300);
 		$("#map-canvas2").show(300);
 		
@@ -375,11 +375,8 @@ $(document).ready(function () {
 	
 	$('#frequency1').click(function(){
 		var i;
-		$('#regular').hide(300);
+		$('#weekly').hide(300);
 		
-		for( i = 1 ; i <=2 ; i++){
-			document.getElementById('regularType'+i).checked = false;
-		}
 		for( i = 1 ; i <=7 ; i++){
 				document.getElementById('day'+i).checked = false;
 		}
@@ -469,6 +466,8 @@ $(document).ready(function () {
 			$("#Date").show("fast");
 		}
 		$("#regular-time").hide();
+		document.getElementById('oneway').checked = false;
+		document.getElementById('bothway').checked = false;
 		
 	});
 	
@@ -710,10 +709,7 @@ $(document).ready(function () {
 		if ($("#frequency1").is(":checked") == false && $("#frequency2").is(":checked") == false){
 			return false;
 		}
-		else if($("#frequency2").is(":checked") == true && $("#regularType1").is(":checked") == false && $("#regularType2").is(":checked") == false ){
-			return false;
-		}
-		else if(($("#regularType1").is(":checked")  == true || $("#regularType2").is(":checked")  == true) && !($("#day1").is(":checked") == true || $("#day2").is(":checked") == true 
+		else if( $("#frequency2").is(":checked")  == true  && !($("#day1").is(":checked") == true || $("#day2").is(":checked") == true 
 			|| $("#day3").is(":checked") == true || $("#day4").is(":checked") == true || $("#day5").is(":checked") == true || $("#day6").is(":checked") == true
 			|| $("#day7").is(":checked") == true)){
 			return false;
@@ -828,14 +824,9 @@ $(document).ready(function () {
 						Once or Regularly:<br/>
 						<div id = "once">
 						<input id="frequency1" name = "frequency" type = "radio" value = "single" /><label for="frequency1">Single</label><br>
-						<input id="frequency2" name = "frequency" type = "radio" value = "regular" /><label for="frequency2">Regular</label><br>
+						<input id="frequency2" name = "frequency" type = "radio" value = "weekly" /><label for="frequency2">weekly</label><br>
 						</div>
-						<div id = "regular" >
-							How Often:
-							<br/>
-							<input id="regularType1" name = "regular1" type = "radio" value = "weekly"/><label for="regularType1"> Weekly </label>
-							<input id="regularType2" name = "regular1" type = "radio" value = "monthly"/><label for="regularType2"> Monthly </label>
-							<br/>
+						<div id = "weekly" >
 							<div id = "weekdays">
 								<input id="day1" name = "days" type = "checkbox" value = "Monday"/><label for="day1">Mon</label>
 								<input id="day2" name = "days" type = "checkbox" value = "Tuesday"/><label for="day2">Tue</label>
@@ -986,6 +977,7 @@ $(document).ready(function () {
 					<input type="hidden" id="place_entered">
 					<input type="hidden" id="start" value=""/>
 					<input type="hidden" id="end" value=""/>
+					<input type="hidden" id="frompage" value="addlift"/>
 				</div>
 				</form>
 				</div>
