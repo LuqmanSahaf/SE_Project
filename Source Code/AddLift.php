@@ -407,46 +407,9 @@ $(document).ready(function () {
 			initialize_place();
 			initialized = true;
 		}
+		$("#searchTextField").focus();
 		goToByScroll("showmap");
 		
-		
-	});
-	
-	//functions for details textarea focussing!!!
-	$("#details").focusin(function(){
-		
-		if($(this).height() < 26)
-		{
-			$(this).animate(
-			{
-				height: "50"
-			});
-		}
-		
-		if($(this).html() == "Details (optional)" && $(this).prop("value") == "Details (optional)" )
-		{
-			$(this).html("").prop("value", "");
-		}
-		
-	}).keyup(function(){
-		var value = $(this).prop("value");
-		$.trim(value);
-		$("#details").html(value);
-	}).focusout(function(){
-		
-		var trimmed = $.trim($(this).prop("value"));
-		$(this).prop("value", trimmed);
-		$(this).html(trimmed);
-		
-		if($(this).prop("value") == "" && $(this).html() == "")
-		{
-			$(this).html("Details (optional)");
-			$(this).prop("value", "Details (optional)");
-			$(this).animate(
-			{
-				height: "25"
-			});
-		}
 		
 	});
 	
