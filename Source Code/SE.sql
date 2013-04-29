@@ -68,9 +68,6 @@ create table lifts(
 delete from lifts;
 commit;
 
-
-
-
 select * from users;
 select * from lifts;
 
