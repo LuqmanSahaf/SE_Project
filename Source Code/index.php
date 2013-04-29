@@ -30,7 +30,7 @@ Released   : 20120902
 			</div>
 			<div id="menu">
 			  <ul>
-					<li ><a href="/SE">Homepage</a></li>
+					<li ><a href="#">Homepage</a></li>
 					<?php
 					session_start();
 					if(isset($_SESSION['username']) && isset($_SESSION['id'])){
@@ -45,26 +45,25 @@ Released   : 20120902
 					<?php
 					}
 					?>
-					<li><a href="credits.html">Credits</a></li>
+				
 <!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
 			</div>
 		</div>
 		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
-		<div id="banner">
-			<div class="content"><img src="images/img10.jpg" width="1040" height="350" alt="" /></div>
-			<div><img src="images/img03.png" width="1000" height="40" alt="" /></div>
-		</div>
+		
 	</div>
 	<!-- end #header -->
-  <div id="page">
-  <div id="content">
-			<div class="post">
-				<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
-				<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
-			</div>
+	<div id="page">
+	<div id="content">
+		<div class="post">
+			<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
+			<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
 		</div>
+		The Team:
+	</div>
 		<div id="three-columns">
+		
 		  <div id="column1">
 			<div><img src="images/pro1.jpg" width="240" height="200" alt="" /></div>
 				      <p>Muhammad Wajahat		              </p>
@@ -77,6 +76,21 @@ Released   : 20120902
 			<div><img src="images/pro2.jpg" width="240" height="200" alt="" /></div>
 				    <p>Luqman Ghani</p>
 			        <p>	2014-10-0180</p>
+				  </blockquote>
+            </blockquote>
+		  </div>
+
+		  <div id="column3">
+			<div><img src="images/pro3.jpg" width="240" height="200" alt="" /></div>
+				    <p>Hasan Abbas</p>
+			        <p>2014-10-0059</p>
+				  </blockquote>
+            </blockquote>
+		  </div>
+		  <div id="column4">
+			<div><img src="images/pro4.jpg" width="240" height="200" alt="" /></div>
+				    <p>Usman Zaheer</p>
+			        <p>	2014-10-0222</p>
 				  </blockquote>
             </blockquote>
 		  </div>

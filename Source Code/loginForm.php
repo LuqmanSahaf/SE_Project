@@ -23,81 +23,47 @@ Released   : 20120902
 </head>
 <body>
 <div id="wrapper">
-  <div id="header-wrapper">
+	<div id="header-wrapper">
 		<div id="header" class="container">
 		  <div id="logo">
 				<h1>SarSubz LUMS</h1>
 			</div>
 			<div id="menu">
 			  <ul>
-					<li ><a href="/SE">Homepage</a></li>
+					<li ><a href="index.php">Homepage</a></li>
 					<li><a href="loginForm.php">Login</a></li>
 					<li><a href="credits.html">Credits</a></li>
 <!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
 			</div>
 		</div>
-		<div id="page">
-  <div id="content">
-			<div class="post">
-				<h1 class="credentials"><a href="#">LOGIN</a></h1>
-				<p class="meta"><span class="date"></span></p>
-		
-			  
-			</div>
+		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	</div>
 		
-	  
-		<!-- end #content --><!-- end #sidebar -->
-	  <div style="clear: both;">&nbsp;</div>
-  </div>
-		
-	</div>
 	<!-- end #header -->
-  <div id="page">
-  <div id="content">
+	<div id="page">
+		<div id="content">
 			<div class="post">
 				<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
 				<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span></p>
 				<?php
-					// require_once 'status.php';
-					
 					if(isset($_POST["invalid"])){
-						
-						echo("The username or password entered is incorrect");
+						echo("<p>The username or password entered is incorrect</p>");
 					}
 				?>		
-				<form action="login.php" method="POST">
-				
-				Username <input type="text" name="username"></input>
-				<br/><br/>
-				Password <input type="password" name="password"></input>
-				<input type="submit" name="Login" value="Login"></input>
-				
+				<div class="loginForm"><form action="login.php" method="POST">
+					Username <input type="text" name="username"></input> <br>
+					Password <input type="password" name="password"></input>
+					<input type="submit" name="Login" value="Login"></input>
 				</form>
+				</div>
 			</div>
 		</div>
-		<div id="three-columns">
-		  <div id="column1">
-			<div><img src="images/pro1.jpg" width="240" height="200" alt="" /></div>
-				      <p>Muhammad Wajahat		              </p>
-				      <p>2014-10-0128</p>
-				    </blockquote>
-		          </blockquote>
-            </blockquote>
-		  </div>
-		  <div id="column2">
-			<div><img src="images/pro2.jpg" width="240" height="200" alt="" /></div>
-				    <p>Luqman Ghani</p>
-			        <p>	2014-10-0180</p>
-				  </blockquote>
-            </blockquote>
-		  </div>
-		</div>
+		
 	  
 		<!-- end #content --><!-- end #sidebar -->
 	  <div style="clear: both;">&nbsp;</div>
-  </div>
+	</div>
 	<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	<!-- end #page --> 
 </div>
