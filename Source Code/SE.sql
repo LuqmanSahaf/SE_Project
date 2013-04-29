@@ -67,7 +67,8 @@ create table lifts(
 create table "RATINGS"(
 username varchar(50),
 foreign key (username) References USERS(username),
-rating int
+rating int,
+rated_by varchar(50)
 );
 
 delete from lifts where lift_id = 3;
