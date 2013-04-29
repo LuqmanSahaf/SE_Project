@@ -15,7 +15,7 @@ Released   : 20120902
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Profile</title>
+<title>Lifts</title>
 <LINK REL=ICON HREF="images/icon.png">
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
@@ -48,10 +48,18 @@ Released   : 20120902
 		</div>
 		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	</div>
+	<div class="tabs">
+		<ul>
+		<li><a href="addLift.php">Advertise New</a></li>
+		<li><a href="search.php">Search</a></li>
+		<li><a href="modifyLift.php">Modify Existing</a></li>
+		<li><a href="#">Show All</a></li>
+		</ul>
+	</div>
 	<div id="page">
 		
 		<div class="post">
-			<h2 class="title"><a href="#">Welcome To Car Pooling System</a></h2>
+			<h2 class="title"><a href="#">Welcome <?php print $_SESSION['username'];?></a></h2>
 			<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span>
 			<br>
 			<h4>SARSUBZ LUMS - ABOUT </h4>

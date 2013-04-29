@@ -32,8 +32,6 @@ Released   : 20120902
 			  <ul>
 					<li ><a href="index.php">Homepage</a></li>
 					<li><a href="loginForm.php">Login</a></li>
-					<li><a href="credits.html">Credits</a></li>
-<!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
 			</div>
 		</div>

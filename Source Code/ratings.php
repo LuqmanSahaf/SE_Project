@@ -15,7 +15,7 @@ Released   : 20120902
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Profile</title>
+<title>Ratings</title>
 <LINK REL=ICON HREF="images/icon.png">
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
@@ -47,6 +47,13 @@ Released   : 20120902
 			</div>
 		</div>
 		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
+	</div>
+	<div class="tabs-r">
+		<ul>
+		<li><a href="addLift.php">Hall of Fame</a></li>
+		<li><a href="search.php">Rate Partner</a></li>
+		<li><a href="modifyLift.php">My Ratings</a></li>
+		</ul>
 	</div>
 	<div id="page">
 		

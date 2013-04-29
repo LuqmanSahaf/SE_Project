@@ -59,7 +59,8 @@ else
 			<div id="menu">
 			  <ul>
 					<li><a href="home.php">Home</a></li>
-					<li><a href="addLift.php">Advertise New</a></li>
+					<li><a href="lifts.php">Manage Lifts</a></li>
+					<li><a href="ratings.php">Manage Ratings</a></li>
 					<li><a href="profile.php">Profile</a></li>
 					<li><a href="logout.php">Logout</a></li>
 			  </ul>
@@ -91,7 +92,6 @@ else
 							echo (ociresult($result,$field));
 							echo ("</td></tr>");
 						}
-						//it will print all users in db
 					}
 				?>
 				</table>
@@ -107,9 +107,12 @@ else
 					Full Name:<input type="text" name="fullname" value='<?php print ociresult($result,"NAME");?>'> <br>
 					Gender:<input type="radio" name="sex" value="M" checked> Male
 						<input type="radio" name="sex" value="F"> Female <br>
-					Designation:<input type="radio" name="designation" value="student" checked> Student
-						<input type="radio" name="designation" value="faculty"> Faculty
-						<input type="radio" name="designation" value="staff"> Staff <br>
+					School:<input type="radio" name="school" value="SBASSE" checked> SBASSE
+						<input type="radio" name="school" value="SDSB"> SDSB 
+						<input type="radio" name="school" value="SHSSL"> SHSSL <br>
+					Designation:<input type="radio" name="designation" value="Student" checked> Student
+						<input type="radio" name="designation" value="Faculty"> Faculty
+						<input type="radio" name="designation" value="Staff"> Staff <br>
 					Cell Phone:<input type="text" name="cell" value='<?php echo ociresult($result,"CELL")?>'> <br>
 					Email:<input type="text" name="email" value='<?php echo ociresult($result,"EMAIL")?>'> <br>
 					<input type="hidden" name="username" value='<?php echo ociresult($result,"USERNAME")?>' >

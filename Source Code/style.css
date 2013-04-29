@@ -64,7 +64,8 @@ a {
 }
 
 a:hover {
-	color: #0f0;
+	color: #3f3;
+	transition: all 1000ms ease;
 }
 
 
@@ -249,6 +250,36 @@ a:hover {
 	width:30%;
 	margin:0 auto;
 	
+}
+
+.tabs{
+	width:70%;
+	background-image:url(images/img02.png);
+	margin:0 auto;
+	padding-bottom:5px;
+	height:40px;
+}
+.tabs ul li{
+	display:inline;
+	width:25%;
+	float:left;
+	text-align:center;
+}
+
+.tabs-r{
+	width:70%;
+	background-image:url(images/img02.png);
+	margin:0 auto;
+	padding-bottom:5px;
+	height:40px;
+}
+.tabs-r ul li{
+	display:inline;
+	margin:0;
+	padding:0;
+	width:33%;
+	float:left;
+	text-align:center;
 }
 
 #page {

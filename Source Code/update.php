@@ -6,7 +6,8 @@
 	$email=$_POST['email'];
 	$sex=$_POST['sex'];
 	$designation=$_POST['designation'];
-	$query="update USERS set Name='".$name."', CELL='".$cell."', email='".$email."', gender='".$sex."', type='".$designation."' where username='".$username."'";
+	$school=$_POST['school'];
+	$query="update USERS set Name='".$name."', CELL='".$cell."', email='".$email."', school='".$school."', gender='".$sex."', type='".$designation."' where username='".$username."'";
 	query($query);
 	header("Location: profile.php");
 	exit();

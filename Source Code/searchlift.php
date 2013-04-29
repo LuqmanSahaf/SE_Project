@@ -784,9 +784,11 @@ $(document).ready(function () {
 			</div>
 			<div id="menu">
 			  <ul>
-					<li ><a href="home.php">Home</a></li>
+					<li><a href="home.php">Home</a></li>
+					<li><a href="lifts.php">Manage Lifts</a></li>
+					<li><a href="ratings.php">Manage Ratings</a></li>
+					<li><a href="profile.php">Profile</a></li>
 					<li><a href="logout.php">Logout</a></li>
-<!--					<li><a href="author.php">Author Info</a></li>!-->
 			  </ul>
 			</div>
 		</div>
