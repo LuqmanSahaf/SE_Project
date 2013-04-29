@@ -1,4 +1,5 @@
 drop table "USERS";
+drop table "LIFTS";
 
 
 create table "USERS"(
@@ -8,20 +9,18 @@ primary key (username),
 password varchar(50),
 name varchar(50),
 gender varchar(1),
-type varchar(20),
 school varchar(10),
+type varchar(20),
 cell varchar(11),
-email varchar(50)
+email varchar(50),
+rating int
 );
 
-insert into USERS (id,username,password,name,gender,type,school,cell,email) values (users_sequence.nextval,'14100180','14100180','Luqman Ghani','M','S','SSE','03214601168','14100180@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,school,cell,email) values (users_sequence.nextval,'14100128','14100128','Muhammad Wajahat','M','S','SSE','03214549988','14100128@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,school,cell,email) values (users_sequence.nextval,'14100222','14100222','Usman Zaheer','M','S','SSE','03024075750','14100222@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,school,cell,email) values (users_sequence.nextval,'14100059','14100059','Hasan Abbas','M','S','SSE','03455158992','14100059@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,school,cell,email) values (users_sequence.nextval,'14100012','14100059','Abuzar Mir','M','S','SDSB','03455158992','14100012@lums.edu.pk');
-
-
-drop table lifts;
+insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100180','14100180','Luqman Ghani','m','student','03214601168','14100180@lums.edu.pk');
+insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100128','14100128','Muhammad Wajahat','m','student','03214549988','14100128@lums.edu.pk');
+insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100222','14100222','Usman Zaheer','m','student','03024075750','14100222@lums.edu.pk');
+insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100059','14100059','Hasan Abbas','m','student','03455158992','14100059@lums.edu.pk');
+insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100012','14100059','Abuzar Mir','m','student','03455158992','14100012@lums.edu.pk');
 
 create table lifts(
   lift_id integer,
@@ -64,6 +63,13 @@ create table lifts(
   freeseats integer
 );
 
+create table lifts_regular(
+  lift_id integer,
+  
+  
+);
+drop table "RATINGS";
+
 create table "RATINGS"(
 username varchar(50),
 foreign key (username) References USERS(username),
@@ -71,24 +77,17 @@ rating int,
 rated_by varchar(50)
 );
 
-delete from lifts where lift_id = 3;
-delete from lifts;
 commit;
 
-
-
 select * from users;
-select * from lifts;
+
 
 select * from USERS where username = '14100180' and password = '14100180';
 
 select NAME,EMAIL FROM USERS where USERNAME = '14100180' and PASSWORD = '14100180';
 
 
-
-
-
-Create Sequence lifts_sequence
+Create Sequence session_sequence
 start with 0
 increment by 1
 minvalue 0;
@@ -98,7 +97,10 @@ start with 0
 increment by 1
 minvalue 0;
 
+Create Sequence lifts_sequence
+start with 0
+increment by 1
+minvalue 0;
 
-drop sequence lifts_sequence;
 Drop Sequence session_sequence;
 Drop Sequence users_sequence;
