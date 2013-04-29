@@ -58,31 +58,18 @@ Released   : 20120902
 	<div id="page">
 		
 		<div class="content">
-			<h4> Your Ratings: </h4>
-				<table>
-				<tr><td><h5> Rated By</h5> </td> <td><h5>  Rating Given </h5></td> </tr>
-				<?php
-					/** Select all the ratings from Ratings table for this user and then show the final average rating	**/
-					$result=query("select * from RATINGS where username=".$_SESSION['username']);
-					$allRatings=array(0);
-					$n=0;
-					while (ocifetch($result)){
-						echo ("<tr> <td>".ociresult($result,"RATED_BY")."</td><td>".ociresult($result,"RATING")."</td></tr>");
-						array_push($allRatings,ociresult($result,"RATING"));
-						$n+=1;
-					}
-					if ($n<1)
-						$n=1;
-					$r=array_sum($allRatings)/$n;
-					echo ("<tr><td><h5>Final Rating: </h5></td><td><h5>".$r."</h5></td></tr>");
-				?>
-				</table>
-				<form class="edit-button" action="change.php" method="POST">
-				<input type="hidden" name="user" value=<?php echo ($_SESSION['username']); ?> >
-				<input type="hidden" name="rating" value=<?php echo ($r); ?> >
-				<input type="submit" value="Update Rating">
-				</form>
-			<!--Fetch Data from the database -->
+			<!-- Just bring out the beasts out of the USERS by using a nested query on RATINGS Table-->
+			<table>
+			<tr> <td> <h5>USER</h5> </td> <td> <h5>RATING</h5> </td> </tr>
+			<?php
+				$result=query("select * from ( select * from USERS order by rating desc) where ROWNUM <= 10");
+				while (ocifetch($result)){
+					echo ("<tr> <td>".ociresult($result,"USERNAME")."</td><td>");
+					echo (ociresult($result,"RATING"));
+					echo ("</td></tr>");
+				}
+			?>
+			</table>
 			<br class="clear" />
 		</div>
 		

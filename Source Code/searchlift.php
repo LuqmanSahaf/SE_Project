@@ -799,7 +799,7 @@ $(document).ready(function () {
 		<li><a href="addLift.php">Advertise New</a></li>
 		<li><a href="searchlift.php">Search</a></li>
 		<li><a href="modifyLift.php">Modify Existing</a></li>
-		<li><a href="#">Show All</a></li>
+		<li><a href="lifts.php">Show All</a></li>
 		</ul>
 	</div>
 	<div id="page">

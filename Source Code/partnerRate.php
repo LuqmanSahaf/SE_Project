@@ -58,31 +58,10 @@ Released   : 20120902
 	<div id="page">
 		
 		<div class="content">
-			<h4> Your Ratings: </h4>
-				<table>
-				<tr><td><h5> Rated By</h5> </td> <td><h5>  Rating Given </h5></td> </tr>
-				<?php
-					/** Select all the ratings from Ratings table for this user and then show the final average rating	**/
-					$result=query("select * from RATINGS where username=".$_SESSION['username']);
-					$allRatings=array(0);
-					$n=0;
-					while (ocifetch($result)){
-						echo ("<tr> <td>".ociresult($result,"RATED_BY")."</td><td>".ociresult($result,"RATING")."</td></tr>");
-						array_push($allRatings,ociresult($result,"RATING"));
-						$n+=1;
-					}
-					if ($n<1)
-						$n=1;
-					$r=array_sum($allRatings)/$n;
-					echo ("<tr><td><h5>Final Rating: </h5></td><td><h5>".$r."</h5></td></tr>");
-				?>
-				</table>
-				<form class="edit-button" action="change.php" method="POST">
-				<input type="hidden" name="user" value=<?php echo ($_SESSION['username']); ?> >
-				<input type="hidden" name="rating" value=<?php echo ($r); ?> >
-				<input type="submit" value="Update Rating">
-				</form>
-			<!--Fetch Data from the database -->
+			<!-- display a List of the lifts that have been completed, allow the user to select one of those,
+				a drop down div opens on selection showing names of the trip members, each with a rating bar in front of them.
+					user rates each one of them and submits his request. -->
+			This Page is under Construction.
 			<br class="clear" />
 		</div>
 		
