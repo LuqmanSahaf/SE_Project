@@ -824,6 +824,14 @@ $(document).ready(function () {
 		</div>
 		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	</div>
+	<div class="tabs">
+		<ul>
+		<li><a href="addLift.php">Advertise New</a></li>
+		<li><a href="searchlift.php">Search</a></li>
+		<li><a href="modifyLift.php">Modify Existing</a></li>
+		<li><a href="#">Show All</a></li>
+		</ul>
+	</div>
 	<div id="page">
 		
 			<div class="post">
