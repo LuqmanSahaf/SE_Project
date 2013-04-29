@@ -64,6 +64,11 @@ create table lifts(
   freeseats integer
 );
 
+create table "RATINGS"(
+username varchar(50),
+foreign key (username) References USERS(username),
+rating int
+);
 
 delete from lifts where lift_id = 3;
 delete from lifts;
