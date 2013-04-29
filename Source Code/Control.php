@@ -179,7 +179,6 @@
 		'".$mon_start."','".$tue_start."','".$wed_start."','".$thu_start."','".$fri_start."','".$sat_start."','".$sun_start."',
 		'".$mon_end."','".$tue_end."','".$wed_end."','".$thu_end."','".$fri_end."','".$sat_end."','".$sun_end."',
 		'$gender','$group','$school','$paid','".$vehicle."','$seats') ";
-		echo($query);
 		$result = query($query);
 		if(!$result){
 			ocirollback();
