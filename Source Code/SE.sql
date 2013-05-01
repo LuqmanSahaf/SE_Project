@@ -13,14 +13,21 @@ school varchar(10),
 type varchar(20),
 cell varchar(11),
 email varchar(50),
-rating int
+rating float
 );
 
-insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100180','14100180','Luqman Ghani','m','student','03214601168','14100180@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100128','14100128','Muhammad Wajahat','m','student','03214549988','14100128@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100222','14100222','Usman Zaheer','m','student','03024075750','14100222@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100059','14100059','Hasan Abbas','m','student','03455158992','14100059@lums.edu.pk');
-insert into USERS (id,username,password,name,gender,type,cell,email) values (users_sequence.nextval,'14100012','14100059','Abuzar Mir','m','student','03455158992','14100012@lums.edu.pk');
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100180','14100180','Luqman Ghani','m','student','03214601168','14100180@lums.edu.pk',4.4);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100128','14100128','Muhammad Wajahat','m','student','03214549988','14100128@lums.edu.pk',4.9);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100222','14100222','Usman Zaheer','m','student','03024075750','14100222@lums.edu.pk',2.3);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100059','14100059','Hasan Abbas','m','student','03455158992','14100059@lums.edu.pk',3.9);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100012','14100012','Abuzar Mir','m','student','03455158992','14100012@lums.edu.pk',3.5);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100111','14100059','Jafry','m','student','03455158992','14100012@lums.edu.pk',2.7);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100112','14100059','Mujahid','m','student','03455158992','14100012@lums.edu.pk',5.0);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100113','14100059','Ahsan','m','student','03455158992','14100012@lums.edu.pk',4.2);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100114','14100059','Noman','m','student','03455158992','14100012@lums.edu.pk',5.0);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100115','14100059','Qarni','m','student','03455158992','14100012@lums.edu.pk',1.8);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100116','14100059','Junaid','m','student','03455158992','14100012@lums.edu.pk',4.5);
+insert into USERS (id,username,password,name,gender,type,cell,email,rating) values (users_sequence.nextval,'14100117','14100059','Amyn Karim','m','student','03455158992','14100012@lums.edu.pk',3.3);
 
 create table lifts(
   lift_id integer,
@@ -73,7 +80,7 @@ drop table "RATINGS";
 create table "RATINGS"(
 username varchar(50),
 foreign key (username) References USERS(username),
-rating int,
+rating float,
 rated_by varchar(50)
 );
 
