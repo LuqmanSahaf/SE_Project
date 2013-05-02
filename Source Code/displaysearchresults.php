@@ -15,12 +15,32 @@ Released   : 20120902
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Lifts</title>
+<title>Profile</title>
 <LINK REL=ICON HREF="images/icon.png">
 <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
 <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+
+<script>
+function displayEdit()
+{
+document.getElementById("update").style.display='block';
+document.getElementById("info").style.display='none';
+}
+
+/*
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+*/
+</script>
 
 </head>
 <body>
@@ -48,21 +68,24 @@ Released   : 20120902
 		</div>
 		<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
 	</div>
-	<div class="tabs">
-		<ul>
-		<li><a href="addLift.php">Advertise New</a></li>
-		<li><a href="searchlift.php">Search</a></li>
-		<li><a href="modifyLift.php">Modify Existing</a></li>
-		<li><a href="lifts.php">Show All</a></li>
-		</ul>
-	</div>
 	<div id="page">
 		
+		<div class="post">
+			<h2 class="title"><a href="#">Welcome To SarSubz Car Pooling System</a></h2>
+			<p class="meta"><span class="date"><?php print(Date("l F d, Y"));?></span>
+			<br/>
+	
+			<br/>
+		</div>
+		
 		<div class="content">
-			<table class="results">
+			
+				<table class="results">
 				<tr> <td><h5>USER</h5></td><td><h5>SOURCE</h5></td><td><h5>DESTINATION</h5></td><td><h5>DATE</h5></td><td><h5>TIME</h5></td><td><h5>PAID</h5></td> </tr>	
 				<?php	
-					$result=query("select LIFTPROVIDER, SOURCE, DESTINATION, STARTDATE, STARTTIME, PAID from LIFTS");
+					$source = $_POST['start'];
+					$destination = $_POST['end'];
+					$result=query("select LIFTPROVIDER, SOURCE, DESTINATION, STARTDATE, STARTTIME, PAID from LIFTS where SOURCE='".$source."' and DESTINATION='".$destination."'");
 					while(ocifetch($result)){
 						echo ("<tr>");
 						for ($i = 1; $i <= oci_num_fields($result);$i++) {
@@ -74,16 +97,19 @@ Released   : 20120902
 						echo ("</tr>");
 					}
 				?>
-			</table>
+				</table>
+				
+			</div>
 			<br class="clear" />
+		<div style="clear: both;">&nbsp;</div>
 		</div>
 		
 	  
 		<!-- end #content --><!-- end #sidebar -->
-		<div style="clear: both;">&nbsp;</div>
-	</div>
+
+  </div>
 	<div class="container"><img src="images/img03.png" width="1000" height="40" alt="" /></div>
-</div>
+	</div>
 	<!-- end #header -->
 
 	

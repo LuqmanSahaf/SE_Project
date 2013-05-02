@@ -28,7 +28,7 @@ This Page is under Construction.
 		addLift($user_id);
 	}
 	elseif($_POST['frompage'] == "searchlift"){
-		searchLift();
+		searchLift($user_id);
 	}
 	
 	
@@ -198,11 +198,13 @@ This Page is under Construction.
 		else{
 			return true;
 		}
+		// header("");
+		
 	}
 	
 	
 	/**--- Search A Lift From Database Function! ---**/
-	function searchLift(){
+	function searchLift($user_id){
 	
 		$source;$destination;$frequency;$way;$group;$paid;$gender;$school="";
 		$mon='0';$tue='0';$wed='0';$thu='0';$fri='0';$sat='0';$sun='0';
@@ -344,45 +346,179 @@ This Page is under Construction.
 			return false;
 		}
 		
-		$q_profile = "select gender,type FROM USERS where user_id = '$user_id' ";
+		$q_profile = "select * FROM USERS where id = $user_id ";
 		$r_profile = query($q_profile);
+		if (!($profile = oci_fetch_array($r_profile)))
+			return false;
+		$profile_type = $profile['TYPE'];
+		echo($profile_type);
 		
 		
 		if($frequency == SINGLE)
-			$query_search = "select * FROM LIFTS where ( (source = '".$source."' and source not like '%".LUMS_ADDRESS."%') or (destination = '".$destination."' and destination not like '%".LUMS_ADDRESS."%') ) and (startdate = '".$startdate."' or  enddate = '".$enddate."') 	";
+			$query_search = "select * FROM LIFTS where ( (source = '".$source."' and source not like '%".LUMS_ADDRESS."%') or (destination = '".$destination."' and destination not like '%".LUMS_ADDRESS."%') )  and startdate >= '".$startdate."' ";
 		else
-			$query_search = "select * FROM LIFTS where ( (source = '".$source."' and source not like '%".LUMS_ADDRESS."%') or (destination = '".$destination."' and destination not like '%".LUMS_ADDRESS."%') ) and startdate >= '".$startdate."'  ";
+			$query_search = "select * FROM LIFTS where ( (source = '".$source."' and source not like '%".LUMS_ADDRESS."%') or (destination = '".$destination."' and destination not like '%".LUMS_ADDRESS."%') ) and startdate >= '".$startdate."' and frequency = '".WEEKLY."' ";
 		
 		$result_search = query($query_search);
+		
+		
+		
 		$scores = array();
-		$lifts = array();
+		$lifts = array(array());
 		$i=1;
-		while(ocifetch($result_search)){
-			$lifts[$i] = ociresult($result_search);
-			$scores[$i] = 0;
-			
-			if(){
+		if($frequency == SINGLE){	
+			while( ($lifts[$i] = oci_fetch_array($result_search) )){
+				$scores[$i] = 0;
 				
+				// $score = scoreStartDate($startdate, lifts[$i]["STARTDATE"] );
+				// scores[$i] += scoreStartDate;
+				
+				
+				// if(lifts[$i]["FREQUENCY"] == SINGLE){
+					// scores[$i] += 5;
+				// }
+				// else{
+					// scores[$i] -= 7;
+					// if($lifts[$i]['way'] == ONEWAY){
+						
+					// }
+					// else{
+						
+					// }
+				// }
+				
+				
+				
+				
+				$scoreGroup = scoreGroup($profile['TYPE'],$lifts[$i]['LIFTGROUP'],$group);
+				$scorePaid = scorePaid($lifts[$i]['PAID'],$paid);
+				$scoreSchool = scoreSchool($profile["SCHOOL"],$lifts[$i]['SCHOOL'],$school);
+				$scoreGender = scoreGender($profile["GENDER"],$lifts[$i]['GENDER'],$gender);
+				
+				$scores[$i] += $scoreGroup + $scorePaid + $scoreSchool + $scoreGender;
+				
+				
+				$member_group = $r_profile['TYPE'];
+				$provider_group = $lifts[$i]['LIFTGROUP'];
+				echo("<br/> lift: '".$lift[$i]['LIFT_ID']."' Total score : $scores[$i]");
+
+				$i++;
 			}
-			
-			
-			$i++;
 		}
+		else{
+			while( ($lifts[$i] = oci_fetch_array($result_search) )){
+				$scores[$i] = 0;
+				$scoreGroup = scoreGroup($profile['TYPE'],$lifts[$i]['LIFTGROUP'],$group);
+				$scorePaid = scorePaid($lifts[$i]['PAID'],$paid);
+				$scoreSchool = scoreSchool($profile["SCHOOL"],$lifts[$i]['SCHOOL'],$school);
+				$scoreGender = scoreGender($profile["GENDER"],$lifts[$i]['GENDER'],$gender);
+				$scores[$i] += $scoreGroup + $scorePaid + $scoreSchool + $scoreGender;
+				$member_group = $r_profile['TYPE'];
+				$provider_group = $lifts[$i]['LIFTGROUP'];
+				$i++;
+			}
+		}
+		
+		arsort($scores);
+		/*?>
+		<input type='hidden' name='scores' value="<?php echo htmlentities(serialize($scores)); ?>" />
+		<input type='hidden' name='lifts' value="<?php echo htmlentities(serialize($lifts)); ?>" />
+		<?php*/
+		$_SESSION['number']=$i-1;
+		$_SESSION['scores'] = $scores;
+		$_SESSION['lifts'] = $lifts;
+		header('Location: displaysearchresults.php');
+		exit();
 	}
 	
 	
+	
+	function scoreStartDate($startdate_member,$startdate){
+		if($startdate_member == $startdate){
+			return 20;
+		}
+		elseif( strtotime("$startdate_member +3 days") >= strtotime($startdate)){
+			return 7;
+		}
+		else{
+			return -20;
+		}
+	}
+	
+	function scoreEndDate($enddate_member, $enddate){
+		if($enddate_member == $enddate){
+			return 15;
+		}
+		elseif( ($enddate_member < $enddate) && strtotime("$enddate_member +3 days") >= strtotime($enddate) ){
+			return 7;
+		}
+		else{
+			return -5;
+		}
+	}
+	
+	function scoreTime($time_member,$time){
+		if(($time_member == null || $time_member == "") && ($time == null || $time == "") ){
+			return 15;
+		}
+		elseif($time == null || $time == ""){
+			return 10;
+		}
+		elseif($time_member == null || $time_member == ""){
+			return 5;
+		}
+		elseif( $time_member == $time ){
+			return 15;
+		}
+		elseif( $time_member < $time && strtotime("$time_member +6 hours") >= strtotime($time) ){
+			return 10;
+		}
+		else
+			return 0;
+	}
+	
+	function scoreGroup($member_group,$provider,$member){
+		if($provider == $member && $provider == $member_group){
+			return 15;
+		}
+		elseif($provider == $member){
+			return 10;
+		}
+		elseif($member == 'nomatter'){
+			return -5;
+		}
+		else{
+			return -10;
+		}
+	}
+	
+	function scoreGender($member_gender,$provider,$member){
+		if($provider == $member && $provider == $member_gender){
+			return 15;
+		}
+		elseif($provider == NOMATTER && $member == NOMATTER){
+			return 10;
+		}
+		elseif($provider == $member){
+			return 5;
+		}
+		else{
+			return -10;
+		}
+	}
 	
 	function scoreSchool($member_school, $provider,$member){
 		if($provider == $member && $provider == $member_school){
 			return 15;
 		}
 		elseif($provider == $member){
-			
+			return 10;
+		}
+		elseif($member == 'nomatter'){
+			return -5;
 		}
 		else{
-			if(){
-				
-			}
+			return -10;
 		}
 	}
 	

@@ -82,7 +82,6 @@ else
 			<div id="info">
 				<table class="profile-table">
 				<?php
-
 					$result=query("select * from USERS where USERNAME=".$_SESSION['username']);
 					while(ocifetch($result)){
 						for ($i = 2; $i <= oci_num_fields($result); ++$i) {

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <!--
 Design by Free CSS Templates
 http://www.freecsstemplates.org
@@ -61,7 +61,13 @@ Released   : 20120902
 			<!-- display a List of the lifts that have been completed, allow the user to select one of those,
 				a drop down div opens on selection showing names of the trip members, each with a rating bar in front of them.
 					user rates each one of them and submits his request. -->
-			This Page is under Construction.
+			<form action="ratePartner.php" method="POST">
+				Username of Partner: <input type="text" name="user"> 
+				Rating: <input type="number" name="rate">
+				<input type="hidden"  name="username" value=<?php echo($_SESSION['username']); ?> >
+				<input type="submit" value="SUBMIT" >
+			</form>
+			
 			<br class="clear" />
 		</div>
 		

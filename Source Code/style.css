@@ -218,8 +218,8 @@ a:hover {
 #menu a {
 	display: block;
 	line-height: 100px;
-	margin-right: 1px;
-	padding: 0px 20px 0px 20px;
+	margin-right: 0px;
+	padding: 0px 10px 0px 20px;
 	text-decoration: none;
 	font-weight:bold;
 	text-align: center;
@@ -310,6 +310,11 @@ a:hover {
 .content{
 	padding-bottom:30px;
 	border-bottom: 1px solid #E7EBED;
+}
+
+.content h5{
+	clear:both;
+	min-width:10px;
 }
 
 #info{
@@ -473,6 +478,11 @@ a:hover {
 #sidebar a:hover {
 	text-decoration: underline;
 }
+
+.results{
+	width:100%;
+}
+
 
 /* Calendar */
 

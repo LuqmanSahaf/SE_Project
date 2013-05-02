@@ -818,7 +818,7 @@ $(document).ready(function () {
 			</div>
 			<div id="content">
 				<div id="form1">
-				<form id = "info-form" method="POST" action ="Control.php">
+				<form id = "info-form" method="POST" action ="displaysearchresults.php">
 				<h5 id = "step1">Step 1: Schedule</h5>
 					<div id = "content1" class="step-content">
 						Once or Regularly:<br/>
